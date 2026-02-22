@@ -280,7 +280,9 @@ default/focus/disabled/loading/error/success and tolerate long labels/messages.
 Verify: Story renders each state; focus ring visible; errors are adjacent to field.
 STOP-AND-ESCALATE: If ARIA associations are unclear; follow a standard pattern (id + aria-describedby).
 
-- [ ] T023 [US2] Implement selection controls primitives (Checkbox/Radio/Switch)
+- [x] T023 [US2] Implement selection controls primitives (Checkbox/Radio/Switch)
+
+Verify: Created src/components/ui/Checkbox.astro, Radio.astro, Switch.astro and story at src/pages/ui/stories/selections.astro. Manual test: run `npm run dev` and open /ui/stories/selections to confirm controls render, are keyboard focusable, respect disabled state, and reflect checked state.
 Scope: Provide accessible selection controls for admin forms.
 Files: `src/components/ui/Checkbox.astro`, `src/components/ui/Radio.astro`, `src/components/ui/Switch.astro`, `src/pages/ui/stories/selection.astro`, `src/pages/docs/design-system/selection.astro`
 Acceptance: Keyboard toggle works; labels are clickable; disabled/error states rendered.

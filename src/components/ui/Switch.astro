@@ -1,0 +1,56 @@
+---
+import "../../styles/typography/ui.css";
+
+interface Props {
+  id?: string;
+  name?: string;
+  checked?: boolean;
+  disabled?: boolean;
+  required?: boolean;
+  label?: string;
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  checked = false,
+  disabled = false,
+  required = false,
+  label = '',
+  class: className = ''
+} = Astro.props as Props;
+
+const inputId = id ?? (name ? `switch-${name}` : undefined);
+---
+
+<label class={`switch ${className}`}>
+  <input
+    id={inputId}
+    name={name}
+    type="checkbox"
+    role="switch"
+    class="switch__input"
+    checked={checked ? true : undefined}
+    disabled={disabled ? true : undefined}
+    required={required ? true : undefined}
+    aria-checked={checked ? 'true' : 'false'}
+  />
+  <span class="switch__track" aria-hidden="true">
+    <span class="switch__thumb" aria-hidden="true"></span>
+  </span>
+  {label && <span class="switch__label">{label}</span>}
+</label>
+
+<style>
+.switch { display: inline-flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none; }
+.switch__input { position: absolute; opacity: 0; width: 0; height: 0; }
+.switch__track { width: 2.25rem; height: 1.25rem; background: var(--color-border-muted, var(--color-border-default)); border-radius: 999px; position: relative; transition: background 120ms ease; display: inline-block; }
+.switch__thumb { width: 1rem; height: 1rem; background: var(--color-surface-default); border-radius: 999px; position: absolute; top: 50%; left: 0.125rem; transform: translate(0, -50%); transition: transform 120ms cubic-bezier(.2,.9,.2,1), background 120ms ease; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.switch__input:checked + .switch__track { background: var(--color-link-primary); }
+.switch__input:checked + .switch__track .switch__thumb { transform: translate(1.0rem, -50%); background: var(--color-surface-default); }
+.switch__label { font-size: 0.95rem; color: var(--color-text-primary); }
+
+.switch__input[disabled] + .switch__track { opacity: 0.6; cursor: not-allowed; }
+.switch__input[disabled] ~ .switch__label { opacity: 0.6; }
+</style>

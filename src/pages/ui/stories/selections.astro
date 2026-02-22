@@ -1,0 +1,39 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from '../../../components/layout/Container.astro';
+import Checkbox from '../../../components/ui/Checkbox.astro';
+import Radio from '../../../components/ui/Radio.astro';
+import Switch from '../../../components/ui/Switch.astro';
+---
+
+<Layout>
+  <Container>
+    <h1>Selection controls</h1>
+
+    <section>
+      <h2>Checkbox</h2>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <Checkbox label="Option A" name="optA" />
+        <Checkbox label="Disabled" name="optB" disabled />
+      </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Radio</h2>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <Radio label="Choice 1" name="radio-group" value="1" />
+        <Radio label="Choice 2" name="radio-group" value="2" />
+        <Radio label="Disabled" name="radio-group" value="3" disabled />
+      </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Switch</h2>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <Switch label="Enable feature" name="feature" />
+        <Switch label="Disabled" name="feature2" checked={false} disabled />
+      </div>
+    </section>
+
+  </Container>
+</Layout>
