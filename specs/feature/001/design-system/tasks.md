@@ -233,9 +233,9 @@ states (default/hover/active/focus/disabled/loading).
 Verify: Story page shows all combinations; keyboard focus visible; no raw hex in component.
 STOP-AND-ESCALATE: If you need JS for button; do not add it (buttons are SSR).
 
-- [x] T019 [US1] Implement `Surface/Card` primitive (Astro) for semantic surfaces/elevation\n\nVerify: Created src/components/ui/Card.astro and story at src/pages/ui/stories/surface.astro. Manual test: run `npm run dev` and open /ui/stories/surface to verify semantic surfaces (default/muted/highlight) and elevation levels (none/sm/md/lg). Component uses token CSS variables for background/border/shadows/spacing/radius.
+- [x] T019 [US1] Implement `Surface/Card` primitive (Astro) for semantic surfaces/elevation\n\nVerify: Created src/components/ui/Card.astro and story at src/pages/ui/stories/surfacess.astro. Manual test: run `npm run dev` and open /ui/stories/surfaces to verify semantic surfaces (default/muted/highlight) and elevation levels (none/sm/md/lg). Component uses token CSS variables for background/border/shadows/spacing/radius.
 Scope: Provide a neutral surface component for dashboards and marketing cards.
-Files: `src/components/ui/Surface.astro`, `src/pages/ui/stories/surfaces.astro`, `src/pages/docs/design-system/surface.astro`
+Files: `src/components/ui/Surface.astro`, `src/pages/ui/stories/surfacess.astro`, `src/pages/docs/design-system/surface.astro`
 Acceptance: Uses semantic surface/border/shadow tokens; supports subtle elevation options.
 Verify: Story page shows surface variants across themes; contrast remains readable.
 STOP-AND-ESCALATE: If you introduce new shadow tokens, update JSON + regenerate CSS.
@@ -474,5 +474,6 @@ STOP-AND-ESCALATE: If e2e depends on local server orchestration not yet implemen
 If staffed, tasks can be parallelized only after Phase 2 is complete:
 - US2 primitives and US3 nav primitives can proceed in parallel (different files).
 - Keep overlay islands (US4) separate from SSR primitives to avoid conflicts.
+
 
 
