@@ -38,7 +38,7 @@ Stop-and-escalate discipline:
 
 **Purpose**: Create the minimum scaffolding so foundational token/theme work is straightforward.
 
-- [ ] T001 Audit current styling + Tailwind usage in `src/styles/global.css`
+- [x] T001 Audit current styling + Tailwind usage in `src/styles/global.css`
 Scope: Determine what exists today (Tailwind v4 CSS import only, no tokens yet) and what must change.
 Files: `src/styles/global.css`, `src/layouts/Layout.astro`, `astro.config.mjs`, `package.json`
 Acceptance: Written audit doc exists and lists next actions without ambiguity.
