@@ -156,7 +156,9 @@ body background/text, link styling, `:focus-visible` ring using `--ring`, and re
 Verify: Keyboard-tab through a simple page; focus ring is visible in all themes/contrast modes.
 STOP-AND-ESCALATE: If any rule requires raw hex or arbitrary spacing; add missing tokens instead.
 
-- [ ] T012 Implement typography tokens and utilities (UI scale vs prose scale)
+- [x] T012 Implement typography tokens and utilities (UI scale vs prose scale)
+
+Verify: Created src/styles/typography/ui.css and src/styles/typography/prose.css and src/components/layout/Prose.astro; prose wrapper styles headings, lists, quotes, code, and enforces a comfortable reading rhythm while UI utilities provide compact sizes for forms and controls. Quick test: render an article with <Prose> and confirm headings and paragraphs use the new scales.
 Scope: Establish consistent font sizes/line heights for UI and prose, tokenized.
 Files: `src/styles/typography/ui.css`, `src/styles/typography/prose.css`, `src/components/layout/Prose.astro`
 Acceptance: Prose wrapper styles headings/lists/quotes/code blocks; UI scale remains separate.

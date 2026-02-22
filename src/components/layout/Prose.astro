@@ -1,0 +1,10 @@
+---
+import "../../styles/typography/prose.css";
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props as Props;
+---
+<article class={`prose ${className}`}>
+  <slot />
+</article>
