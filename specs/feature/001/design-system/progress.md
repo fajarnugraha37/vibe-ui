@@ -28,3 +28,17 @@ T033 Implement Dialog/Modal (React island + focus trap)
   - npm test → 2 passed
   - npm run build → success (18 pages built)
 
+
+T034 Implement Drawer (React island + sliding panels)
+
+- What changed:
+  - Added src/islands/react/Drawer.tsx (React island), src/components/ui/Drawer.astro, src/pages/ui/stories/drawer.astro
+
+- Spec/Constitution compliance:
+  - Drawer surface uses token CSS variables for background and text (e.g., --color-surface-default, --color-text-primary).
+  - Reduced-motion respected; focus is trapped while drawer is open and Escape closes with focus return to trigger.
+
+- Verification commands & result:
+  - npm test → 2 passed
+  - npm run build → success (19 pages built)
+

@@ -402,7 +402,7 @@ trap works, escape closes, focus returns; states visible; tokens-only styling.
 Verify: Manual keyboard walkthrough; add minimal e2e if stable.
 STOP-AND-ESCALATE: If focus trap implementation is unclear; use a minimal proven approach, do not hand-roll complex logic.
 
-- [ ] T034 [US4] Implement `Drawer` as a React island (mobile nav + settings panels)
+- [x] T034 [US4] Implement `Drawer` as a React island (mobile nav + settings panels)
 Scope: Provide drawer with left/right/bottom variants; focus management; escape close.
 Files: `src/islands/react/Drawer.tsx`, `src/components/ui/Drawer.astro`, `src/pages/ui/stories/drawer.astro`
 Acceptance: Works on mobile; respects reduced motion; tokens-only.
