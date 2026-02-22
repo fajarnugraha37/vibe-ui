@@ -1,0 +1,32 @@
+---
+interface Props {
+  items?: { title: string; href?: string }[];
+  separator?: string;
+  class?: string;
+}
+
+const { items = [], separator = '/', class: className = '' } = Astro.props as Props;
+---
+
+<nav class={`breadcrumbs ${className}`} aria-label="Breadcrumb">
+  <ol class="breadcrumbs__list">
+    {items.map((it, idx) => (
+      <li class={`breadcrumbs__item ${idx === items.length - 1 ? 'is-current' : ''}`}> 
+        {it.href && idx !== items.length - 1 ? (
+          <a href={it.href} class="breadcrumbs__link">{it.title}</a>
+        ) : (
+          <span class="breadcrumbs__current">{it.title}</span>
+        )}
+        {idx !== items.length - 1 && <span class="breadcrumbs__sep" aria-hidden="true">{separator}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+.breadcrumbs__list { display:flex; gap:0.5rem; align-items:center; list-style:none; padding:0; margin:0; }
+.breadcrumbs__item { display:flex; align-items:center; gap:0.5rem; }
+.breadcrumbs__link { color: var(--color-link-primary); text-decoration:none; }
+.breadcrumbs__current { color: var(--color-text-muted); }
+.breadcrumbs__sep { color: var(--color-text-muted); }
+</style>

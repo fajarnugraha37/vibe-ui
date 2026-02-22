@@ -330,7 +330,9 @@ STOP-AND-ESCALATE: If routing conflicts with existing docs; align with Astro fil
 **Independent Test**: Open nav + table stories and validate:
 mobile drawer behavior, table comfortable vs dense, and table-to-cards on small screens.
 
-- [ ] T027 [US3] Implement basic nav primitives (Breadcrumbs + Tabs/Segmented)
+- [x] T027 [US3] Implement basic nav primitives (Breadcrumbs + Tabs/Segmented)
+
+Verify: Created src/components/nav/Breadcrumbs.astro, src/components/nav/Tabs.astro and story at src/pages/ui/stories/nav.astro. Manual test: run `npm run dev` and open /ui/stories/nav to confirm keyboard accessibility, active state visibility, and overflow handling.
 Scope: Provide low-risk navigation primitives (SSR only).
 Files: `src/components/nav/Breadcrumbs.astro`, `src/components/nav/Tabs.astro`, `src/pages/ui/stories/nav.astro`, `src/pages/docs/design-system/nav.astro`
 Acceptance: Keyboard accessible; active state visible; long labels do not break.

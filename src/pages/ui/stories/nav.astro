@@ -1,0 +1,33 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from '../../../components/layout/Container.astro';
+import Breadcrumbs from '../../../components/nav/Breadcrumbs.astro';
+import Tabs from '../../../components/nav/Tabs.astro';
+
+const crumbs = [
+  { title: 'Home', href: '/' },
+  { title: 'Components', href: '/ui/stories' },
+  { title: 'Navigation' },
+];
+const tabs = [
+  { id: 'overview', title: 'Overview', href: '/ui/stories/nav#overview' },
+  { id: 'data', title: 'Data', href: '/ui/stories/nav#data' },
+  { id: 'disabled', title: 'Disabled', href: '/ui/stories/nav#disabled', disabled: true },
+];
+---
+
+<Layout>
+  <Container>
+    <h1>Navigation primitives</h1>
+
+    <section>
+      <h2>Breadcrumbs</h2>
+      <Breadcrumbs items={crumbs} />
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Tabs / Segmented</h2>
+      <Tabs tabs={tabs} activeId={'overview'} />
+    </section>
+  </Container>
+</Layout>
