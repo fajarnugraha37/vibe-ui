@@ -194,7 +194,9 @@ token id naming contract + theme completeness across modes.
 Verify: Run `npm test` and confirm it fails if you remove a token value.
 STOP-AND-ESCALATE: If adding test tooling breaks build; revert and isolate config.
 
-- [ ] T016 Setup basic e2e tooling (Playwright) for smoke coverage
+- [x] T016 Setup basic e2e tooling (Playwright) for smoke coverage
+
+Verify: Playwright config (playwright.config.ts) and tests/e2e/stories-smoke.spec.ts exist and package.json includes `test:e2e`. To run locally: 1) run `npx playwright install` to install browser binaries, 2) start dev server (`npm run dev`) and 3) execute `npm run test:e2e`. Note: Playwright browsers must be installed before running e2e tests.
 Scope: Add Playwright config and 1-2 minimal tests for:
 stories page loads, theme persistence attribute present.
 Files: `package.json` (scripts + dev deps), `playwright.config.ts`, `tests/e2e/stories-smoke.spec.ts`
