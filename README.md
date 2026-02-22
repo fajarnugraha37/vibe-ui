@@ -66,3 +66,4 @@ Theme switching and persistence
 Notes for contributors
 - Preserve the manual block in AGENTS.md when updating automation scripts.
 - See specs/feature/001/design-system/ for plan.md, tasks.md, contracts/, and checklists/.
+- @agent:speckit-runner "execute /speckit.implement for specs/design-system. keep going task-by-task (undone) until done or blocked."

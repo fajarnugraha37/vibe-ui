@@ -1,7 +1,7 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 import Container from "../../../components/layout/Container.astro";
-import Drawer from "../../../components/ui/Drawer.astro";
+import DrawerComponent from "../../../components/ui/Drawer.astro";
 ---
 
 <Layout title="Drawer Stories">
@@ -9,23 +9,23 @@ import Drawer from "../../../components/ui/Drawer.astro";
     <h1>Drawer stories</h1>
     <section>
       <h2>Left drawer</h2>
-      <Drawer triggerText="Open left" direction="left" title="Left drawer">
+      <DrawerComponent triggerText="Open left" direction="left" title="Left drawer">
         <p>Content inside the left drawer.</p>
-      </Drawer>
+      </DrawerComponent>
     </section>
 
     <section style="margin-top:16px;">
       <h2>Right drawer</h2>
-      <Drawer triggerText="Open right" direction="right" title="Right drawer">
+      <DrawerComponent triggerText="Open right" direction="right" title="Right drawer">
         <p>Content inside the right drawer.</p>
-      </Drawer>
+      </DrawerComponent>
     </section>
 
     <section style="margin-top:16px;">
       <h2>Bottom drawer</h2>
-      <Drawer triggerText="Open bottom" direction="bottom" title="Bottom drawer">
+      <DrawerComponent triggerText="Open bottom" direction="bottom" title="Bottom drawer">
         <p>Content inside the bottom drawer.</p>
-      </Drawer>
+      </DrawerComponent>
     </section>
   </Container>
 </Layout>
