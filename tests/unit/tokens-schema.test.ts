@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs'
+import { describe, expect, test } from 'vitest'
 
 const tokens = JSON.parse(readFileSync(new URL('../../src/lib/tokens/tokens.v1.json', import.meta.url), 'utf8'))
 const themes = JSON.parse(readFileSync(new URL('../../src/lib/tokens/themes.v1.json', import.meta.url), 'utf8'))
@@ -10,7 +11,7 @@ describe('tokens schema', () => {
   })
 
   test('each semantic token present in themes for each mode/contrast', () => {
-    const semanticIds = tokens.tokens.filter(t => t.layer === 'semantic').map(t => t.id)
+    const semanticIds = tokens.tokens.filter((t: { layer: string }) => t.layer === 'semantic').map((t: { id: any }) => t.id)
     const modes = Object.keys(themes.modes || {})
     for (const mode of modes) {
       const contrasts = Object.keys(themes.modes[mode] || {})
