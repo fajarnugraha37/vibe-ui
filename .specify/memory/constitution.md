@@ -1,10 +1,11 @@
 <!--
 Sync Impact Report
 
-- Version change: N/A (file missing; created from template) -> 1.0.0
-- Modified principles: N/A (new constitution)
-- Added sections: Core Principles, Technology Stack, Workflow & Quality Gates, Governance
-- Removed sections: N/A
+- Version change: 1.0.0 -> 1.1.0
+- Modified principles: none
+- Added sections: none
+- Removed sections: none
+- Notes: Expanded Workflow & Quality Gates with cheap-AI task authoring + progress discipline.
 - Templates requiring updates:
   - ✅ .specify/templates/plan-template.md
   - ✅ .specify/templates/spec-template.md
@@ -129,6 +130,16 @@ Required review gates (apply to all UI work):
   correct, reduced motion supported.
 - Responsiveness: mobile-first behavior matches the rules in Principle IV.
 
+Task authoring + execution discipline (cheap AI-ready):
+- Tasks MUST be detailed and followable by a human or a low-context, low-reasoning
+  agent. Each task MUST include explicit file paths and concrete steps.
+- Before starting a task, the assignee MUST update the task entry to indicate it is
+  in progress. After finishing, the assignee MUST mark the task completed and note
+  what verification was performed.
+- If any requirement, dependency, or decision is ambiguous or missing, the plan or
+  task list MUST include an explicit "CLARIFY" task that records:
+  the question, the options, and what blocks until clarified.
+
 ## Governance
 
 - This constitution is the source of truth for UI architecture and quality gates.
@@ -144,7 +155,9 @@ Required review gates (apply to all UI work):
   - PATCH: clarifications/wording/typos without semantic policy changes.
 - Compliance expectations:
   - Feature plans MUST include a "Constitution Check" gate.
+  - Task lists MUST be cheap-AI executable: explicit steps, progress updates, and
+    explicit clarification tasks for unknowns.
   - PR reviews MUST explicitly confirm token compliance, a11y requirements, and
     responsive behavior for any UI-affecting changes.
 
-**Version**: 1.0.0 | **Ratified**: 2026-02-22 | **Last Amended**: 2026-02-22
+**Version**: 1.1.0 | **Ratified**: 2026-02-22 | **Last Amended**: 2026-02-22

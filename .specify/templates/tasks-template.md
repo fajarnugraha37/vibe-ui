@@ -22,6 +22,23 @@ If the feature touches UI, include explicit tasks for:
 - Responsive behavior (tables -> cards, sidebar -> drawer, forms 2-col -> 1-col)
 - Typography system (UI scale vs prose scale; prose wrapper incl. code blocks)
 
+## Task Authoring & Progress Discipline (Cheap AI-Ready)
+
+This task list is intended to be executable by a human or a low-context, low-reasoning
+agent. Write tasks so they are unambiguous and followable.
+
+- Each task MUST include explicit file paths and concrete steps. If applicable,
+  include exact commands to run and what "done" looks like.
+- Before starting a task, the assignee MUST update the task entry to indicate it is
+  in progress. After finishing, the assignee MUST mark it complete and note what
+  verification was performed.
+  Example conventions that work in plain Markdown:
+  - Start: append `(IN PROGRESS)` to the task line.
+  - Done: change `- [ ]` to `- [x]` and remove `(IN PROGRESS)`.
+- If anything is ambiguous or missing, add an explicit `CLARIFY` task that captures
+  the question and the decision needed, and mark dependent tasks as blocked until
+  clarified.
+
 ## Format: `[ID] [P?] [Story] Description`
 
 - **[P]**: Can run in parallel (different files, no dependencies)
