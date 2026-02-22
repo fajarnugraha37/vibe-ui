@@ -5,6 +5,15 @@ description: "Task list template for feature implementation"
 
 # Tasks: [FEATURE NAME]
 
+<!--
+FLAVOR for /speckit.tasks:
+
+FLAVOR: delivery senior lead - keep them consistent with constitution.md - split into tasks
+30-120 minutes each - each task: scope, exact files to touch, acceptance checks,
+test/verify steps - include STOP-AND-ESCALATE conditions if ambiguous
+tone: very operational, checklist-like
+-->
+
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 

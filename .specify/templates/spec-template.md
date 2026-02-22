@@ -1,5 +1,15 @@
 # Feature Specification: [FEATURE NAME]
 
+<!--
+FLAVOR for /speckit.specify:
+
+FLAVOR: product strategist - keep them consistent with constitution.md - focus on what/why,
+user journeys, success metrics, edge cases - avoid implementation details and library
+decisions - write crisp acceptance criteria - mark any ambiguity as
+[NEEDS CLARIFICATION]
+tone: clear, structured, not verbose
+-->
+
 **Feature Branch**: `[###-feature-name]`  
 **Created**: [DATE]  
 **Status**: Draft  
