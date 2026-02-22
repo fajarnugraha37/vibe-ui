@@ -66,7 +66,10 @@ commands, where tokens live, how to switch themes, and where to find `/ui/storie
 Verify: `npm run dev` instructions remain correct; no dead links.
 STOP-AND-ESCALATE: If the expected story routes differ from the plan (must reconcile first).
 
-- [ ] T004 Decide how `AGENTS.md` is handled and make it explicit
+- [x] T004 Decide how `AGENTS.md` is handled and make it explicit
+
+Acceptance: AGENTS.md is committed to the repo and manual additions are preserved.
+Verify: Ensure AGENTS.md is tracked (git ls-files AGENTS.md) and README contains guidance to preserve the manual block when updating automation scripts.
 Scope: Ensure the repo has a stable agent guidance file policy (commit or ignore) and is consistent.
 Files: `AGENTS.md`, `.gitignore` (only if needed)
 Acceptance: Either:
