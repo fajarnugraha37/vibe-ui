@@ -96,11 +96,3 @@ If blocked at any point:
 * Do not introduce new dependencies unless the task explicitly requires it.
 
 ---
-
-copilot `
---model gpt-5-mini `
---agent=speckit-runner `
---prompt "execute /speckit.implement for specs/design-system. keep going task-by-task until done or blocked." `
---allow-tool `
---allow-all-urls `
---allow-all-paths
