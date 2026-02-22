@@ -378,7 +378,9 @@ STOP-AND-ESCALATE: If density toggle UI not implemented; add minimal toggle in s
 **Independent Test**: Open overlay stories and validate:
 focus trap/return, escape close, keyboard navigation, toasts/alerts, empty/loading patterns.
 
-- [ ] T031 [US4] Implement `Alert` + `InlineMessage` + `Toast` primitives
+- [x] T031 [US4] Implement `Alert` + `InlineMessage` + `Toast` primitives
+
+Verify: Created src/components/ui/Alert.astro, src/components/ui/InlineMessage.astro, src/components/ui/Toast.astro and story at src/pages/ui/stories/feedback.astro. Manual test: run `npm run dev`, open /ui/stories/feedback to confirm alerts render with correct aria roles, inline messages render inline, and the toast demo shows a transient toast when clicking the demo button.
 Scope: Provide consistent feedback components for success/error/info/warn.
 Files: `src/components/ui/Alert.astro`, `src/components/ui/Toast.astro`, `src/pages/ui/stories/feedback.astro`, `src/pages/docs/design-system/feedback.astro`
 Acceptance: Supports semantic variants and clear states; tokens-only styling.
