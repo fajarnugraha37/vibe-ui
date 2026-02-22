@@ -146,7 +146,9 @@ Acceptance: Toggle updates attributes and persists overrides; "reset to system" 
 Verify: Manual test in devtools Application/Storage; reload persists.
 STOP-AND-ESCALATE: If this requires a full framework island; keep it as minimal inline script first.
 
-- [ ] T011 Implement base styles: body, text, surfaces, links, focus ring, reduced motion
+- [x] T011 Implement base styles: body, text, surfaces, links, focus ring, reduced motion
+
+Verify: src/styles/global.css imports generated tokens and defines body background/text using semantic tokens, :focus-visible uses --color-ring, .surface helper uses surface/border/radius tokens, and a reduced-motion media query is present. Manual test: run dev and confirm body bg/text update, tab to focus to see ring, and toggling theme still applies without FOUC.
 Scope: Define a calm enterprise default look using semantic tokens only.
 Files: `src/styles/global.css`, `src/styles/generated/tokens.css` (generated)
 Acceptance: Base layer includes:
