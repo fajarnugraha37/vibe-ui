@@ -1,0 +1,25 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from "../../../components/layout/Container.astro";
+import CitationsList from "../../../components/ai/CitationsList.astro";
+---
+
+<Layout title="Chat Citations">
+  <Container>
+    <h1>Chat Citations</h1>
+    <p>Example citation badges and a citations list.</p>
+
+    <section>
+      <h2>Badges</h2>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <a class="citation-badge" href="#">Citation 1</a>
+        <a class="citation-badge" href="#">Citation 2</a>
+      </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Citations list</h2>
+      <CitationsList items={[{ title: 'OpenAI API', href: 'https://openai.com', snippet: 'Reference for the model API' }, { title: 'Example Paper', href: '#', snippet: 'Paper describing the technique' }]} />
+    </section>
+  </Container>
+</Layout>

@@ -409,7 +409,7 @@ Acceptance: Works on mobile; respects reduced motion; tokens-only.
 Verify: Manual test; ensure aria labels/roles correct.
 STOP-AND-ESCALATE: If drawer overlaps with SideNav implementation; refactor to reuse one primitive.
 
-- [ ] T035 [US4] Implement minimum chat citation UI components (badges + citations list)
+- [x] T035 [US4] Implement minimum chat citation UI components (badges + citations list)
 Scope: Provide citation badge and citations list section using AI semantic tokens.
 Files: `src/components/ai/CitationBadge.astro`, `src/components/ai/CitationsList.astro`, `src/pages/ui/stories/chat-citations.astro`, `src/pages/docs/design-system/ai-tokens.astro`
 Acceptance: Citations are readable in all modes; tokens-only styling; long URLs wrap safely.

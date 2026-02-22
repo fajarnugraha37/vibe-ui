@@ -42,3 +42,17 @@ T034 Implement Drawer (React island + sliding panels)
   - npm test → 2 passed
   - npm run build → success (19 pages built)
 
+
+T035 Chat citations (badges + list)
+
+- What changed:
+  - Added src/components/ai/CitationBadge.astro, src/components/ai/CitationsList.astro, src/pages/ui/stories/chat-citations.astro, src/pages/docs/design-system/ai-tokens.astro
+
+- Spec/Constitution compliance:
+  - Components use token CSS variables for spacing/colors where available (e.g., --color-surface-default, --color-border-default, --color-text-secondary).
+  - Long URLs will wrap safely in badges/lists per story examples.
+
+- Verification commands & result:
+  - npm test → 2 passed
+  - npm run build → success (21 pages built)
+
