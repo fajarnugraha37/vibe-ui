@@ -82,6 +82,15 @@
   Fill them out with the right functional requirements.
 -->
 
+### Constitution Constraints *(mandatory for UI work)*
+
+- Use semantic tokens only (no raw hex/ad-hoc colors in components).
+- Implement light/dark theming via `data-theme` and CSS variables.
+- Ensure a11y gates: keyboard nav, visible focus ring, ARIA/semantics, reduced motion.
+- Keep JS minimal: islands only; avoid turning the site into a global SPA.
+- Implement required interaction states for UI elements: hover/focus/disabled/loading/error (success where relevant).
+- Follow responsive rules: tables -> cards on mobile; sidebar -> drawer; forms 2-col desktop -> 1-col mobile.
+
 ### Functional Requirements
 
 - **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
