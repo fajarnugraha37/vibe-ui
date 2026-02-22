@@ -86,7 +86,9 @@ STOP-AND-ESCALATE: If committing `AGENTS.md` would leak private info (do not com
 
 **⚠️ CRITICAL**: No component work can begin until this phase is complete.
 
-- [ ] T005 Define token registry source-of-truth as JSON in `src/lib/tokens/tokens.v1.json`
+- [x] T005 Define token registry source-of-truth as JSON in `src/lib/tokens/tokens.v1.json`
+
+Verify: tokens.v1.json created under src/lib/tokens with foundation tokens (space/radius/font/motion), semantic tokens (color.surface.*, color.text.*, color.border.*, color.state.*, color.link.*, color.ring), and component placeholders (component.button.*, component.input.*, component.formfield.*, component.table.*). Token ids follow dot-separated lowercase contract (e.g., `color.text.primary`).
 Scope: Create the machine-readable token registry (token list only, no CSS yet).
 Files: `src/lib/tokens/tokens.v1.json`
 Acceptance: JSON includes at least:
