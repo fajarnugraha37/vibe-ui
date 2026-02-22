@@ -1,0 +1,86 @@
+---
+interface Props { title?: string; }
+const { title = 'Vibe UI' } = Astro.props as Props;
+---
+
+<header class="topbar" role="banner">
+  <button id="drawer-toggle" class="topbar__menu" aria-controls="main-nav" aria-expanded="false" aria-label="Open navigation">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="20" height="20"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+  </button>
+  <div class="topbar__brand">
+    <span class="topbar__logo" aria-hidden="true"></span>
+    <span class="topbar__title">{title}</span>
+  </div>
+</header>
+
+<script type="module">
+  (function () {
+    const btn = document.getElementById('drawer-toggle');
+    if (!btn) return;
+
+    let previousFocus = null;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        document.documentElement.removeAttribute('data-drawer-open');
+      }
+    };
+
+    const observer = new MutationObserver((records) => {
+      for (const rec of records) {
+        if (rec.attributeName === 'data-drawer-open') {
+          const open = document.documentElement.hasAttribute('data-drawer-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+          if (!open && previousFocus) {
+            try { previousFocus.focus(); } catch (e) {}
+            previousFocus = null;
+            document.removeEventListener('keydown', onKeyDown);
+          }
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      const closer = target && target.closest && target.closest('[data-drawer-close]');
+      if (closer) {
+        const wasOpen = document.documentElement.hasAttribute('data-drawer-open');
+        document.documentElement.removeAttribute('data-drawer-open');
+        if (wasOpen && previousFocus) {
+          try { previousFocus.focus(); } catch (err) {}
+          previousFocus = null;
+          document.removeEventListener('keydown', onKeyDown);
+        }
+      }
+    });
+
+    btn.addEventListener('click', () => {
+      const open = document.documentElement.hasAttribute('data-drawer-open');
+      if (!open) {
+        previousFocus = document.activeElement;
+        document.documentElement.setAttribute('data-drawer-open', 'true');
+        document.addEventListener('keydown', onKeyDown);
+        // focus first interactive inside nav
+        const first = document.querySelector('.sidenav a, .sidenav button, .sidenav [tabindex]');
+        if (first) try { (first).focus(); } catch (e) {}
+      } else {
+        document.documentElement.removeAttribute('data-drawer-open');
+      }
+    });
+  })();
+</script>
+
+<style>
+.topbar { display:flex; align-items:center; gap:1rem; padding: 0.5rem 1rem; background: var(--color-surface-default); border-bottom: 1px solid var(--color-border-default); position: sticky; top: 0; z-index: 55; box-shadow: 0 1px 0 rgba(0,0,0,0.02); }
+.topbar__menu { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; background: rgba(0,0,0,0.03); border:1px solid rgba(0,0,0,0.04); border-radius:8px; cursor:pointer; transition: background 160ms ease, transform 160ms ease; }
+.topbar__menu:hover { background: rgba(0,0,0,0.06); transform: translateY(-0.5px); }
+.topbar__menu:focus { outline: 2px solid var(--color-link-primary); outline-offset: 2px; }
+
+.topbar__brand { display:flex; align-items:center; gap:0.5rem; }
+.topbar__logo { width:28px; height:28px; border-radius:6px; background: var(--color-link-primary); display:inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.topbar__title { font-weight:600; color: var(--color-text-primary); }
+
+@media (min-width: 1024px) { .topbar__menu { display:none; } }
+</style>

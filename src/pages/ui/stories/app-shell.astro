@@ -1,0 +1,28 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import TopBar from '../../../components/nav/TopBar.astro';
+import SideNav from '../../../components/nav/SideNav.astro';
+import Container from '../../../components/layout/Container.astro';
+
+const navItems = [
+  { title: 'Dashboard', href: '/app/dashboard' },
+  { title: 'Reports', href: '/app/reports' },
+  { title: 'Settings', href: '/app/settings' },
+  { title: 'Help', href: '/docs' }
+];
+---
+
+<Layout>
+  <TopBar />
+  <div class="app-shell" style="display:flex;align-items:flex-start;">
+    <SideNav items={navItems} />
+
+    <main class="app-main" style="flex:1;padding:1rem;min-height:60vh;">
+      <Container>
+        <h1>App shell (demo)</h1>
+        <p>Use the menu button on small screens to open the drawer. Press Escape to close; focus will return to the trigger.</p>
+        <p>Resize the viewport to test responsive behavior: the nav is a left sidebar on wide screens and a drawer on small screens.</p>
+      </Container>
+    </main>
+  </div>
+</Layout>

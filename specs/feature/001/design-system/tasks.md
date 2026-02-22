@@ -339,7 +339,9 @@ Acceptance: Keyboard accessible; active state visible; long labels do not break.
 Verify: Story demonstrates active/disabled/overflow behavior.
 STOP-AND-ESCALATE: If tabs require JS roving index; keep v1 minimal or convert to island explicitly.
 
-- [ ] T028 [US3] Implement `SideNav` + mobile drawer pattern (Astro + minimal island only if required)
+- [x] T028 [US3] Implement `SideNav` + mobile drawer pattern (Astro + minimal island only if required)
+
+Verify: Created src/components/nav/SideNav.astro and src/components/nav/TopBar.astro and story at src/pages/ui/stories/app-shell.astro. Manual test: run `npm run dev` and open /ui/stories/app-shell; on small viewport ensure the menu button opens the drawer, clicking the overlay or pressing Escape closes it, and focus returns to the menu button.
 Scope: Side nav becomes a drawer on mobile with correct focus management.
 Files: `src/components/nav/SideNav.astro`, `src/components/nav/TopBar.astro`, `src/pages/ui/stories/app-shell.astro`
 Acceptance: On small screens:

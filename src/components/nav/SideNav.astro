@@ -1,0 +1,60 @@
+---
+interface Props {
+  id?: string;
+  items?: { title: string; href?: string; disabled?: boolean }[];
+  class?: string;
+}
+
+const { id = 'main-nav', items = [], class: className = '' } = Astro.props as Props;
+---
+
+<nav id={id} class={`sidenav ${className}`} aria-label="Primary navigation">
+  <div class="sidenav__inner">
+    <button class="sidenav__close" data-drawer-close aria-label="Close navigation" onclick="document.documentElement.removeAttribute('data-drawer-open');">×</button>
+
+    <ul class="sidenav__list">
+      {items.length
+        ? items.map((it) => (
+            <li class="sidenav__item">
+              <a
+                class={`sidenav__link ${it.disabled ? 'is-disabled' : ''}`}
+                href={it.href ?? '#'}
+                aria-disabled={it.disabled ? 'true' : undefined}
+                >{it.title}</a>
+            </li>
+          ))
+        : (
+          <slot />
+        )}
+    </ul>
+  </div>
+
+  <!-- overlay closes drawer on small screens -->
+  <div class="sidenav__overlay" data-drawer-close onclick="document.documentElement.removeAttribute('data-drawer-open');" aria-hidden="true"></div>
+</nav>
+
+<style>
+.sidenav { position: fixed; left: 0; top: 0; bottom: 0; width: 260px; background: var(--color-surface-default); z-index: 60; transform: translateX(-100%); transition: transform 220ms cubic-bezier(.2,.9,.2,1); box-shadow: 0 12px 40px rgba(0,0,0,0.12); border-right: 1px solid rgba(0,0,0,0.04); }
+html[data-drawer-open="true"] .sidenav { transform: translateX(0); }
+
+@media (min-width: 1024px) {
+  .sidenav { position: relative; transform: none; box-shadow: none; width: 220px; height: auto; border-right: none; }
+  .sidenav__overlay { display: none; }
+  .sidenav__close { display: none; }
+}
+
+.sidenav__inner { padding: 1rem 0.75rem; height: 100%; overflow:auto; }
+.sidenav__close { position: absolute; right: 8px; top: 8px; background: rgba(0,0,0,0.04); border: none; padding: 6px 10px; font-size: 1.1rem; cursor: pointer; border-radius: 6px; }
+.sidenav__close:hover { background: rgba(0,0,0,0.06); }
+
+.sidenav__list { list-style: none; margin: 0; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.25rem; }
+.sidenav__item { }
+.sidenav__link { display: block; padding: 0.6rem 0.75rem; color: var(--color-text-primary); text-decoration: none; border-radius: var(--radius-sm); transition: background 120ms ease, color 120ms ease; }
+.sidenav__link:hover { background: rgba(0,0,0,0.04); }
+.sidenav__link:focus { outline: 2px solid var(--color-link-primary); outline-offset: 2px; }
+.sidenav__link.is-active { background: rgba(0,0,0,0.06); font-weight: 600; color: var(--color-link-primary); }
+.sidenav__link.is-disabled { opacity: 0.6; pointer-events: none; }
+
+.sidenav__overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.28); opacity: 0; pointer-events: none; transition: opacity 220ms ease; z-index: 50; }
+html[data-drawer-open="true"] .sidenav__overlay { opacity: 1; pointer-events: auto; }
+</style>
