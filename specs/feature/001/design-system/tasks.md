@@ -240,7 +240,9 @@ Acceptance: Uses semantic surface/border/shadow tokens; supports subtle elevatio
 Verify: Story page shows surface variants across themes; contrast remains readable.
 STOP-AND-ESCALATE: If you introduce new shadow tokens, update JSON + regenerate CSS.
 
-- [ ] T020 [US1] Implement typography story and prose wrapper demo
+- [x] T020 [US1] Implement typography story and prose wrapper demo
+
+Verify: Created src/pages/ui/stories/typography.astro demonstrating UI scale and a Prose wrapper; manual test: run `npm run dev` and open /ui/stories/typography to confirm headings, paragraphs, lists, code blocks, and blockquotes render correctly using token-driven typography.
 Scope: Provide a deterministic page showing UI scale vs prose scale.
 Files: `src/pages/ui/stories/typography.astro`, `src/components/layout/Prose.astro`, `src/pages/docs/design-system/typography.astro`
 Acceptance: Story demonstrates:
