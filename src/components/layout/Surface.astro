@@ -1,0 +1,10 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props as Props;
+---
+
+<div class={`surface ${className}`} role="group">
+  <slot />
+</div>

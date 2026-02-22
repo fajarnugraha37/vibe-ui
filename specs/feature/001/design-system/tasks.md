@@ -174,7 +174,9 @@ Acceptance: Motion utilities reference tokens; reduced motion disables non-essen
 Verify: Toggle OS reduced motion (or emulate) and confirm animations reduce.
 STOP-AND-ESCALATE: If any animation is required to understand state; add a non-motion fallback.
 
-- [ ] T014 Create layout primitives to enforce max width, padding, spacing rhythm
+- [x] T014 Create layout primitives to enforce max width, padding, spacing rhythm
+
+Verify: Created src/components/layout/Container.astro, src/components/layout/Section.astro, src/components/layout/Surface.astro. Container centers content with max-width 1200px and uses spacing tokens for padding; Section provides vertical rhythm using spacing tokens; Surface uses the .surface helper for semantic surface styles. Manual test: render the primitives and verify token-driven spacing and surface styles.
 Scope: Provide reusable Container/Section/Surface primitives to prevent per-page spacing drift.
 Files: `src/components/layout/Container.astro`, `src/components/layout/Section.astro`, `src/components/layout/Surface.astro`
 Acceptance: Defaults match constitution:
