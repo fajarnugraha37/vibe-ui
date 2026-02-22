@@ -127,7 +127,9 @@ CSS variables for spacing/radius/shadows/motion where applicable.
 Verify: Build: `npm run build` succeeds; adding a sample class `bg-surface` works in a page.
 STOP-AND-ESCALATE: If Tailwind v4 config is not being picked up; document and switch to CSS `@theme`.
 
-- [ ] T009 Implement theme/contrast attribute initialization to avoid FOUC
+- [x] T009 Implement theme/contrast attribute initialization to avoid FOUC
+
+Verify: Added inline script in src/layouts/Layout.astro to set `data-theme` and `data-contrast` on first paint; created src/lib/tokens/theme.ts helper file for future control and persistence. Manual test: set localStorage keys `vibe-theme`/`vibe-contrast`, reload, and confirm attributes on <html>.
 Scope: Apply `data-theme` and `data-contrast` early based on:
 persisted override else OS preference.
 Files: `src/lib/tokens/theme.ts` (create), `src/layouts/Layout.astro` (update)
