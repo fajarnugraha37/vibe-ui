@@ -117,7 +117,9 @@ Acceptance: Running the script overwrites the generated file deterministically a
 Verify: Run: `node scripts/tokens/generate-css.mjs` and inspect `src/styles/generated/tokens.css`.
 STOP-AND-ESCALATE: If script output differs between runs on the same input (must be deterministic).
 
-- [ ] T008 Add Tailwind mapping for semantic tokens (colors/spacing/radius/shadow/motion)
+- [x] T008 Add Tailwind mapping for semantic tokens (colors/spacing/radius/shadow/motion)
+
+Verify: tailwind.config.ts created mapping semantic color tokens to `hsl(var(--token) / <alpha-value>)`, spacing/radius map to CSS variables; run `npm run build` to validate Tailwind picks up the new config.
 Scope: Ensure Tailwind utilities consume tokens only and no raw palette is exposed.
 Files: `tailwind.config.ts` (create), `src/styles/global.css` (update if needed)
 Acceptance: Tailwind theme values map to `hsl(var(--token) / <alpha-value>)` for colors and to
