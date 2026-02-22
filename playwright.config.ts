@@ -6,6 +6,11 @@ export default defineConfig({
   expect: { timeout: 5000 },
   fullyParallel: false,
   retries: process.env.CI ? 2 : 0,
+  webServer: {
+    command: 'npm run dev',
+    port: 4321,
+    reuseExistingServer: !process.env.CI,
+  },
   use: {
     headless: true,
     viewport: { width: 1280, height: 720 },
