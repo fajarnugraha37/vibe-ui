@@ -13,3 +13,18 @@ T032 Implement async and empty patterns (Skeleton/Spinner/Progress/EmptyState)
   - npm run test:e2e → 18 passed
   - npm test → 2 passed
   - npm run build → success (16 pages built)
+
+
+T033 Implement Dialog/Modal (React island + focus trap)
+
+- What changed:
+  - Added src/islands/react/Dialog.tsx (React island), src/components/ui/Dialog.astro (Astro wrapper), src/pages/ui/stories/dialog.astro, src/pages/docs/design-system/dialog.astro
+
+- Spec/Constitution compliance:
+  - Dialog surface and text use token CSS variables (e.g., --color-surface-default, --color-text-primary); overlay uses a translucent layer (no dedicated overlay token in v1).
+  - Reduced-motion respected; focus is trapped while open and Escape closes the dialog with focus returned to the trigger.
+
+- Verification commands & result:
+  - npm test → 2 passed
+  - npm run build → success (18 pages built)
+

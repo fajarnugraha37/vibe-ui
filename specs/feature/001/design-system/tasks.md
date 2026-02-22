@@ -394,7 +394,7 @@ Acceptance: Reduced-motion respected; aria-busy/status guidance included in docs
 Verify: Story shows variations; no motion reliance for meaning.
 STOP-AND-ESCALATE: If animations are needed for meaning; add text/status alternative.
 
-- [ ] T033 [US4] Implement `Dialog/Modal` as a React island with focus trap + return
+- [x] T033 [US4] Implement `Dialog/Modal` as a React island with focus trap + return
 Scope: Provide an accessible modal with sizes (sm/md/lg/fullscreen as needed) and reduced motion.
 Files: `src/islands/react/Dialog.tsx`, `src/components/ui/Dialog.astro` (wrapper), `src/pages/ui/stories/dialog.astro`, `src/pages/docs/design-system/dialog.astro`
 Acceptance: Keyboard-only:
