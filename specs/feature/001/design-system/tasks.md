@@ -250,7 +250,8 @@ UI headings/forms text vs prose article with headings/lists/quotes/code.
 Verify: Long strings wrap without breaking layout; code blocks styled.
 STOP-AND-ESCALATE: If prose styling requires arbitrary margins; add spacing tokens.
 
-- [ ] T021 [US1] Add a token-drift guard check (fast scan) and wire to `npm run check:tokens`
+- [x] T021 [US1] Add a token-drift guard check (fast scan) and wire to `npm run check:tokens`
+  - Verification: Created scripts/tokens/check-token-drift.mjs which scans src/ for raw color values (hex, rgb(), hsl()) and exits non-zero on findings; run `node scripts/tokens/check-token-drift.mjs` to verify.
 Scope: Add a cheap check that detects raw hex and obvious raw spacing usage in components.
 Files: `package.json` (script), `scripts/tokens/check-token-drift.mjs`
 Acceptance: Script fails CI/local if it finds:

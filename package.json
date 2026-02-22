@@ -7,6 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check:tokens": "node scripts/tokens/check-token-drift.mjs",
     "test": "vitest run",
     "test:unit": "vitest run",
     "test:e2e": "playwright test"
