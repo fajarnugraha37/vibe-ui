@@ -349,7 +349,9 @@ drawer opens/closes, escape closes, focus returns to trigger.
 Verify: Keyboard walkthrough; reduced-motion respected.
 STOP-AND-ESCALATE: If focus management is hard without JS; move only the drawer into a React island.
 
-- [ ] T029 [US3] Implement `Table` (SSR) + pagination + responsive degradation to cards
+- [x] T029 [US3] Implement `Table` (SSR) + pagination + responsive degradation to cards
+
+Verify: Created src/components/ui/Table.astro, src/components/ui/Pagination.astro and story at src/pages/ui/stories/table.astro. Manual test: run `npm run dev` and open /ui/stories/table to validate comfortable vs dense modes, selection state, empty/loading/error states, and mobile card degradation by resizing the viewport. Run `npm run test:e2e` after adding T030 to validate responsive degradation and density toggle behavior.
 Scope: Table default comfortable density with optional dense mode; mobile card degradation.
 Files: `src/components/ui/Table.astro`, `src/components/ui/Pagination.astro`, `src/pages/ui/stories/table.astro`, `src/pages/docs/design-system/table.astro`
 Acceptance: Story shows:

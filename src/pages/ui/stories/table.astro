@@ -1,0 +1,52 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from '../../../components/layout/Container.astro';
+import Table from '../../../components/ui/Table.astro';
+import Pagination from '../../../components/ui/Pagination.astro';
+
+const columns = [
+  { key: 'id', label: 'ID' },
+  { key: 'name', label: 'Name' },
+  { key: 'email', label: 'Email' },
+  { key: 'role', label: 'Role' }
+];
+
+const sampleRows = Array.from({ length: 12 }).map((_, i) => ({
+  id: i + 1,
+  name: `User ${i + 1}`,
+  email: `user${i+1}@example.com`,
+  role: i % 3 === 0 ? 'Admin' : 'Member'
+}));
+---
+
+<Layout>
+  <Container>
+    <h1>Table patterns</h1>
+
+    <section>
+      <h2>Comfortable</h2>
+      <Table columns={columns} rows={sampleRows.slice(0,6)} density="comfortable" selectable={true} />
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Dense</h2>
+      <Table columns={columns} rows={sampleRows.slice(0,6)} density="dense" selectable={true} />
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Empty / Loading / Error</h2>
+      <div style="display:flex;gap:12px;flex-direction:column;max-width:720px;">
+        <Table columns={columns} rows={[]} emptyMessage="No users found" />
+        <Table columns={columns} rows={sampleRows.slice(0,2)} loading={true} />
+        <Table columns={columns} rows={[]} error="Failed to load data" />
+      </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Pagination + mobile cards</h2>
+      <Table columns={columns} rows={sampleRows} selectable={true} />
+      <div style="margin-top:12px;"><Pagination page={1} total={3} baseUrl="/ui/stories/table" /></div>
+    </section>
+
+  </Container>
+</Layout>
