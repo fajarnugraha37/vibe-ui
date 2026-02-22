@@ -107,7 +107,9 @@ Acceptance: Every semantic token from T005 has a value in each mode; no missing 
 Verify: Quick check by counting keys per theme; values are strings (HSL triplets recommended).
 STOP-AND-ESCALATE: If you cannot pick reasonable defaults without brand input; propose neutrals + 1 accent.
 
-- [ ] T007 Add minimal generator script to build CSS variables from JSON
+- [x] T007 Add minimal generator script to build CSS variables from JSON
+
+Verify: Run `node scripts/tokens/generate-css.mjs` to regenerate `src/styles/generated/tokens.css`. Output includes `:root` defaults and overrides for `[data-theme="dark"]`, `[data-theme="light"][data-contrast="high"]`, and `[data-theme="dark"][data-contrast="high"]`. Generation is deterministic (sorted token ids).
 Scope: Create a script that outputs `src/styles/generated/tokens.css` from the JSON registry + themes.
 Files: `scripts/tokens/generate-css.mjs`, `src/styles/generated/tokens.css`
 Acceptance: Running the script overwrites the generated file deterministically and sets:
