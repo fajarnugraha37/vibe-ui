@@ -1,0 +1,35 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from '../../../components/layout/Container.astro';
+import FormField from '../../../components/forms/FormField.astro';
+import FormGrid from '../../../components/forms/FormGrid.astro';
+import Input from '../../../components/ui/Input.astro';
+import Textarea from '../../../components/ui/Textarea.astro';
+---
+
+<Layout>
+  <Container>
+    <h1>FormField composite</h1>
+
+    <section>
+      <h2>Examples</h2>
+      <FormGrid>
+        <FormField label="First name" name="first" required helper="Given name">
+          <Input name="first" placeholder="Jane" />
+        </FormField>
+
+        <FormField label="Last name" name="last" helper="Family name">
+          <Input name="last" placeholder="Doe" />
+        </FormField>
+
+        <FormField label="Bio" name="bio" helper="Tell us about you" state="error" error="Too short">
+          <Textarea name="bio" rows={4} placeholder="Write a short bio" />
+        </FormField>
+
+        <FormField label="Notes" name="notes" state="disabled">
+          <Textarea name="notes" placeholder="Read-only" state="disabled" />
+        </FormField>
+      </FormGrid>
+    </section>
+  </Container>
+</Layout>

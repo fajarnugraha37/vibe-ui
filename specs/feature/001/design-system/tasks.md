@@ -289,7 +289,9 @@ Acceptance: Keyboard toggle works; labels are clickable; disabled/error states r
 Verify: Tab/space/arrow behavior works per control; focus visible.
 STOP-AND-ESCALATE: If you need JS for switch; do not add it (use native input).
 
-- [ ] T024 [US2] Implement `FormField` composite (label + helper + error) and responsive grid helpers
+- [x] T024 [US2] Implement `FormField` composite (label + helper + error) and responsive grid helpers
+
+Verify: Created src/components/forms/FormField.astro and FormGrid.astro and story at src/pages/ui/stories/forms.astro. Manual test: run `npm run dev` and open /ui/stories/forms to confirm label/helper/error placement, responsive 2-col -> 1-col behavior, and aria-describedby associations.
 Scope: A single source of truth for form field layout and messaging.
 Files: `src/components/forms/FormField.astro`, `src/components/forms/FormGrid.astro`, `src/pages/ui/stories/forms.astro`, `src/pages/docs/design-system/formfield.astro`
 Acceptance: Enforces:

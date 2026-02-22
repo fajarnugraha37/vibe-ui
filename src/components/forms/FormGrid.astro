@@ -1,0 +1,15 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props as Props;
+---
+
+<div class={`form-grid ${className}`}>
+  <slot />
+</div>
+
+<style>
+.form-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .form-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; } }
+</style>
