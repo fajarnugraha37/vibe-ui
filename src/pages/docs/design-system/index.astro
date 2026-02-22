@@ -1,0 +1,33 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from '../../../components/layout/Container.astro';
+---
+
+<Layout>
+  <Container>
+    <h1>Design System Documentation</h1>
+    <p>Quick index of primitives, examples, and guidance. Use the linked stories for live examples and visual regression anchors.</p>
+    <ul>
+      <li><a href="/ui/stories/buttons">Buttons</a></li>
+      <li><a href="/ui/stories/inputs">Inputs & Textareas</a></li>
+      <li><a href="/ui/stories/selections">Selection controls (Checkbox/Radio/Switch)</a></li>
+      <li><a href="/ui/stories/surfaces">Surfaces</a></li>
+      <li><a href="/ui/stories/forms">FormField composite</a></li>
+      <li><a href="/ui/stories/forms-validation">Form validation (demo)</a></li>
+      <li><a href="/ui/stories/typography">Typography</a></li>
+    </ul>
+
+    <section>
+      <h2>Do / Don't</h2>
+      <h3>Tokens</h3>
+      <ul>
+        <li>Do use semantic tokens (CSS vars). Don't hardcode raw color values in components.</li>
+      </ul>
+      <h3>Components</h3>
+      <ul>
+        <li>Do compose primitives into simple composites. Don't over-configure components with many props.</li>
+        <li>Do prefer native inputs with ARIA for small interactions; use React islands only when necessary.</li>
+      </ul>
+    </section>
+  </Container>
+</Layout>

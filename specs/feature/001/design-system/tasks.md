@@ -310,7 +310,9 @@ blur shows error, submit blocks when invalid, loading disables submission.
 Verify: `npm run test:e2e` passes.
 STOP-AND-ESCALATE: If the app has no stable URL for stories; fix story routes first.
 
-- [ ] T026 [US2] Add docs index and navigation for design system docs pages
+- [x] T026 [US2] Add docs index and navigation for design system docs pages
+
+Verify: Created src/pages/docs/design-system/index.astro. Manual test: run `npm run dev` and open /docs/design-system to confirm the index lists primitive docs and links to stories, and includes concise do/don't guidance.
 Scope: Make docs discoverable (not just story pages).
 Files: `src/pages/docs/design-system/index.astro`, `src/pages/docs/design-system/_nav.astro` (optional)
 Acceptance: Docs index links to all primitive docs created so far; includes "do/don't" sections.
