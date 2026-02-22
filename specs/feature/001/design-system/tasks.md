@@ -300,7 +300,9 @@ Verify: Story includes:
 required, optional, error, success, loading, and disabled examples.
 STOP-AND-ESCALATE: If it becomes too configurable; reduce props and keep composition-based API.
 
-- [ ] T025 [US2] Add e2e smoke for blur+submit validation timing
+- [x] T025 [US2] Add e2e smoke for blur+submit validation timing
+
+Verify: Added tests/e2e/forms-validation.spec.ts and story at src/pages/ui/stories/forms-validation.astro. Manual verification: run `npm run dev` and ensure http://localhost:4321/ui/stories/forms-validation is reachable, then run `npm run test:e2e` to validate blur->error, submit blocks when invalid, and loading disables the submit button.
 Scope: One high-value e2e test for form behavior.
 Files: `tests/e2e/forms-validation.spec.ts`
 Acceptance: Test covers:
