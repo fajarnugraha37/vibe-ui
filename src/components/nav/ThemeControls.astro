@@ -1,0 +1,25 @@
+---
+---
+<nav role="navigation" aria-label="Theme controls" class="theme-controls" style="display:flex;gap:8px;align-items:center;padding:8px;">
+  <button id="toggle-theme" aria-label="Toggle theme" type="button">Toggle theme</button>
+  <button id="toggle-contrast" aria-label="Toggle contrast" type="button">Toggle contrast</button>
+</nav>
+<script type="module">
+  (function(){
+    const root = document.documentElement;
+    function setTheme(theme){ root.setAttribute('data-theme', theme); try{ localStorage.setItem('vibe-theme', theme); }catch(e){} }
+    function setContrast(contrast){ root.setAttribute('data-contrast', contrast); try{ localStorage.setItem('vibe-contrast', contrast); }catch(e){} }
+    document.addEventListener('DOMContentLoaded', function(){
+      const tBtn = document.getElementById('toggle-theme');
+      const cBtn = document.getElementById('toggle-contrast');
+      tBtn && tBtn.addEventListener('click', function(){
+        const current = root.getAttribute('data-theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+      cBtn && cBtn.addEventListener('click', function(){
+        const current = root.getAttribute('data-contrast') || 'default';
+        setContrast(current === 'default' ? 'high' : 'default');
+      });
+    });
+  })();
+</script>

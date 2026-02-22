@@ -1,5 +1,7 @@
 ---
+import ThemeControls from "../components/nav/ThemeControls.astro";
 import "../styles/global.css";
+import "../styles/generated/tokens.css";
 
 interface Props {
   title: string;
@@ -51,6 +53,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost
     <title>{title}</title>
   </head>
   <body>
+    <ThemeControls />
     <slot />
   </body>
 </html>

@@ -137,7 +137,9 @@ Acceptance: Layout sets the correct attributes on first paint (no flash from wro
 Verify: Manual test: set localStorage overrides, reload, confirm attributes on `<html>` or `<body>`.
 STOP-AND-ESCALATE: If deciding between `<html>` vs `<body>` attributes changes too much; pick one and be consistent.
 
-- [ ] T010 Add theme + contrast toggle UI (minimal JS, bounded)
+- [x] T010 Add theme + contrast toggle UI (minimal JS, bounded)
+
+Verify: ThemeControls.astro created and wired into src/layouts/Layout.astro. Test: run the app, click theme/contrast toggles in the header, and confirm localStorage keys `vibe-theme` and `vibe-contrast` are set and the `<html>` element has matching `data-theme`/`data-contrast` attributes.
 Scope: Provide a small control to set persisted overrides for theme and contrast.
 Files: `src/components/nav/ThemeControls.astro` (create), `src/layouts/Layout.astro` (wire in)
 Acceptance: Toggle updates attributes and persists overrides; "reset to system" is possible.
