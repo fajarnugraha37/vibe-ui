@@ -27,8 +27,18 @@ If the feature touches UI, include explicit tasks for:
 This task list is intended to be executable by a human or a low-context, low-reasoning
 agent. Write tasks so they are unambiguous and followable.
 
-- Each task MUST include explicit file paths and concrete steps. If applicable,
-  include exact commands to run and what "done" looks like.
+- Each task MUST be self-contained for cheap models:
+  include the minimum required context inline (e.g., the exact file(s) to inspect,
+  the exact token/component to reuse, and any relevant snippet names to search for).
+- Each task MUST include explicit file paths and concrete steps. If applicable:
+  include exact commands to run, expected outputs, and what "done" looks like.
+- Each task MUST specify verification:
+  what to check (file diff, `npm test`, `npm run build`, screenshot steps, etc.).
+- Each task MUST be single-responsibility:
+  one primary outcome per task; avoid bundling unrelated work.
+- Each task MUST include a stop condition:
+  if the assignee cannot proceed without guessing, add a `CLARIFY` task and mark
+  dependent tasks blocked until clarified.
 - Before starting a task, the assignee MUST update the task entry to indicate it is
   in progress. After finishing, the assignee MUST mark it complete and note what
   verification was performed.

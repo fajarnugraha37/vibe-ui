@@ -43,6 +43,8 @@ Reference: `.specify/memory/constitution.md`
 - Layout rhythm: max-w 1200, padding 24, spacing rhythm 4/8/12/16/24/32 (tokenized)
 - Typography: separate UI scale vs prose scale; blog uses a prose wrapper with styled code blocks
 - Task discipline: tasks must be cheap-AI followable; progress updated before/after; ambiguities captured as "CLARIFY" tasks
+- Cheap-model constraints: tasks are self-contained, single-responsibility, explicit steps/commands,
+  include expected outputs + verification, and include stop-and-clarify rules (no guessing)
 
 ## Project Structure
 
