@@ -97,7 +97,9 @@ and component tokens placeholders for v1 primitives (button/input/formfield/tabl
 Verify: Token ids follow dot-separated lowercase contract (e.g., `color.text.primary`).
 STOP-AND-ESCALATE: If naming contract conflicts with constitution; do not invent a new convention.
 
-- [ ] T006 Define theme values (light/dark + contrast default/high) in `src/lib/tokens/themes.v1.json`
+- [x] T006 Define theme values (light/dark + contrast default/high) in `src/lib/tokens/themes.v1.json`
+
+Verify: themes.v1.json created under src/lib/tokens with values for light/default, light/high, dark/default, dark/high for each semantic token from T005; quick check: ensure each mode has the same number of keys.
 Scope: Provide actual token values for all required semantic tokens across 4 modes:
 light/default, light/high, dark/default, dark/high.
 Files: `src/lib/tokens/themes.v1.json`
