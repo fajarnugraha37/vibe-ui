@@ -46,7 +46,10 @@ Verify: Create `specs/feature/001/design-system/notes/setup-audit.md` with:
 existing state, gaps vs constitution, and the exact files to change in M1.
 STOP-AND-ESCALATE: If Tailwind config already exists elsewhere or tokens already exist in CSS.
 
-- [ ] T002 Create baseline folder scaffolding for the design system
+- [x] T002 Create baseline folder scaffolding for the design system
+
+Verify: Created placeholder directories and .gitkeep files; run git status to confirm new files are present.
+
 Scope: Add empty placeholder files to anchor the planned structure (no components yet).
 Files: `src/components/ui/.gitkeep`, `src/components/forms/.gitkeep`, `src/components/layout/.gitkeep`, `src/components/nav/.gitkeep`, `src/components/ai/.gitkeep`, `src/islands/react/.gitkeep`, `src/pages/ui/stories/.gitkeep`, `src/pages/docs/design-system/.gitkeep`, `src/styles/tokens/.gitkeep`, `src/styles/themes/.gitkeep`, `src/styles/typography/.gitkeep`, `src/styles/motion/.gitkeep`, `src/styles/generated/.gitkeep`, `src/lib/tokens/.gitkeep`, `src/lib/a11y/.gitkeep`, `tests/unit/.gitkeep`, `tests/e2e/.gitkeep`, `scripts/tokens/.gitkeep`
 Acceptance: Folders exist and are tracked by git (placeholders committed).
@@ -440,4 +443,5 @@ STOP-AND-ESCALATE: If e2e depends on local server orchestration not yet implemen
 If staffed, tasks can be parallelized only after Phase 2 is complete:
 - US2 primitives and US3 nav primitives can proceed in parallel (different files).
 - Keep overlay islands (US4) separate from SSR primitives to avoid conflicts.
+
 
