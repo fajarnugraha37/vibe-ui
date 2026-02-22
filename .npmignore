@@ -1,0 +1,13 @@
+# npm publish ignore patterns
+dist/
+build/
+coverage/
+logs/
+*.log
+.env
+.DS_Store
+.vscode/
+.idea/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
