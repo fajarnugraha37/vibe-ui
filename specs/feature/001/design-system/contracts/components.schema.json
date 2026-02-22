@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/design-system/components.schema.json",
+  "title": "Design System Component Metadata (v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["components"],
+  "properties": {
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/component" }
+    }
+  },
+  "$defs": {
+    "componentId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Z][A-Za-z0-9]*$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["primitive", "composite", "page-example"]
+    },
+    "state": {
+      "type": "string",
+      "enum": ["default", "hover", "active", "focus", "disabled", "loading", "error", "success", "open", "closing"]
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "states", "a11y", "responsive", "tokenRoles"],
+      "properties": {
+        "id": { "$ref": "#/$defs/componentId" },
+        "kind": { "$ref": "#/$defs/kind" },
+        "variants": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "sizes": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "states": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/state" }
+        },
+        "a11y": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["keyboard", "semantics"],
+          "properties": {
+            "keyboard": { "type": "string", "minLength": 1 },
+            "semantics": { "type": "string", "minLength": 1 },
+            "aria": { "type": "string" }
+          }
+        },
+        "responsive": { "type": "string", "minLength": 1 },
+        "tokenRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "pattern": "^[a-z0-9]+(\\.[a-z0-9]+)+$"
+          }
+        }
+      }
+    }
+  }
+}
+
