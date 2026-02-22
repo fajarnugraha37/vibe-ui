@@ -34,11 +34,26 @@ import Toast from '../../../components/ui/Toast.astro';
   </Container>
 
   <script type="module">
-    document.getElementById('show-toast')?.addEventListener('click', () => {
-      const t = document.getElementById('demo-toast');
-      if (!t) return;
-      t.setAttribute('data-visible','true');
-      setTimeout(()=> t.setAttribute('data-visible','false'), 2200);
-    });
+    (function () {
+      function showDemoToast() {
+        const t = document.getElementById('demo-toast');
+        if (!t) return;
+        t.setAttribute('data-visible', 'true');
+        setTimeout(() => t.setAttribute('data-visible', 'false'), 2200);
+      }
+
+      function initToast() {
+        const btn = document.getElementById('show-toast');
+        if (btn) btn.addEventListener('click', showDemoToast);
+        // Expose for manual trigger in devtools
+        try { window.__vibe_show_demo_toast = showDemoToast; } catch (e) { /* noop */ }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initToast);
+      } else {
+        initToast();
+      }
+    })();
   </script>
 </Layout>
