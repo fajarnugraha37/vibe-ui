@@ -12,6 +12,16 @@ description: "Task list template for feature implementation"
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
+## Constitution-Driven Tasks (UI Work)
+
+If the feature touches UI, include explicit tasks for:
+
+- Design tokens + theming (semantic tokens only; light/dark via `data-theme`)
+- Base styles (body bg/text defaults, focus ring, reduced motion support)
+- Component states (default/hover/focus/disabled/loading/error/success as applicable)
+- Responsive behavior (tables -> cards, sidebar -> drawer, forms 2-col -> 1-col)
+- Typography system (UI scale vs prose scale; prose wrapper incl. code blocks)
+
 ## Format: `[ID] [P?] [Story] Description`
 
 - **[P]**: Can run in parallel (different files, no dependencies)
