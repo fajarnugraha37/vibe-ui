@@ -233,7 +233,7 @@ states (default/hover/active/focus/disabled/loading).
 Verify: Story page shows all combinations; keyboard focus visible; no raw hex in component.
 STOP-AND-ESCALATE: If you need JS for button; do not add it (buttons are SSR).
 
-- [ ] T019 [US1] Implement `Surface/Card` primitive (Astro) for semantic surfaces/elevation
+- [x] T019 [US1] Implement `Surface/Card` primitive (Astro) for semantic surfaces/elevation\n\nVerify: Created src/components/ui/Card.astro and story at src/pages/ui/stories/surface.astro. Manual test: run `npm run dev` and open /ui/stories/surface to verify semantic surfaces (default/muted/highlight) and elevation levels (none/sm/md/lg). Component uses token CSS variables for background/border/shadows/spacing/radius.
 Scope: Provide a neutral surface component for dashboards and marketing cards.
 Files: `src/components/ui/Surface.astro`, `src/pages/ui/stories/surfaces.astro`, `src/pages/docs/design-system/surface.astro`
 Acceptance: Uses semantic surface/border/shadow tokens; supports subtle elevation options.
