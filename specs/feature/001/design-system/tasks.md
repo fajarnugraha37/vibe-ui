@@ -184,7 +184,9 @@ max-w 1200, padding 24, spacing rhythm tokenized.
 Verify: Render primitives in a test page; confirm they apply expected spacing classes/tokens.
 STOP-AND-ESCALATE: If spacing/rhythm tokens are missing; add them in token registry first.
 
-- [ ] T015 Setup unit test tooling (Vitest) for token/schema validation
+- [x] T015 Setup unit test tooling (Vitest) for token/schema validation
+
+Verify: Added vitest.config.ts and tests/unit/tokens-schema.test.ts that validate tokens.v1.json and themes.v1.json coverage for semantic tokens across modes and contrasts. Run `npm test` to execute unit tests locally.
 Scope: Add minimal unit test setup to validate token registry and theme coverage.
 Files: `package.json` (scripts + dev deps), `vitest.config.ts`, `tests/unit/tokens-schema.test.ts`
 Acceptance: `npm test` runs and validates:
