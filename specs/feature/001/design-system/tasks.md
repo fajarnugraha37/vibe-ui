@@ -224,7 +224,7 @@ Acceptance: Index lists links to all story pages (buttons, inputs, typography, s
 Verify: `npm run dev` and navigate to `/ui/stories`.
 STOP-AND-ESCALATE: If routing differs (Astro file-based); follow Astro conventions only.
 
-- [ ] T018 [US1] Implement `Button` primitive (Astro) with full state styling
+- [x] T018 [US1] Implement `Button` primitive (Astro) with full state styling\n\nVerify: Created src/components/ui/Button.astro and story at src/pages/ui/stories/buttons.astro. Manual test: run `npm run dev` and open /ui/stories/buttons to verify variants (primary/secondary/ghost/destructive/link), sizes (sm/md/lg/icon), and states (loading/disabled). Component uses token CSS variables for colors/spacing/radius and motion tokens for spinner.
 Scope: Add Button supporting variants and sizes; token-only styles; states visible.
 Files: `src/components/ui/Button.astro`, `src/pages/ui/stories/buttons.astro`, `src/pages/docs/design-system/button.astro`
 Acceptance: Supports at minimum:
