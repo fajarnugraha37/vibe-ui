@@ -215,7 +215,9 @@ STOP-AND-ESCALATE: If CI environment is required; document local-only steps and 
 **Independent Test**: Open `/ui/stories` and verify:
 theme + contrast switching, focus ring, token-only styling, and deterministic state coverage.
 
-- [ ] T017 [US1] Create stories index route in `src/pages/ui/stories/index.astro`
+- [x] T017 [US1] Create stories index route in `src/pages/ui/stories/index.astro`
+
+Verify: Index route created at src/pages/ui/stories/index.astro and lists story links for Buttons, Surfaces, Typography, Inputs, Table, Dialog. Manual verify: run `npm run dev` and visit /ui/stories.
 Scope: Provide a stable navigation hub for all story pages.
 Files: `src/pages/ui/stories/index.astro`, `src/components/layout/Container.astro` (reuse)
 Acceptance: Index lists links to all story pages (buttons, inputs, typography, surfaces, tables, modals).
