@@ -25,7 +25,10 @@ const sampleRows = Array.from({ length: 12 }).map((_, i) => ({
 
     <section>
       <h2>Comfortable</h2>
-      <Table columns={columns} rows={sampleRows.slice(0,6)} density="comfortable" selectable={true} />
+      <div style="margin-bottom:8px;">
+        <button id="density-toggle" aria-pressed="false" class="btn btn-ghost">Toggle density</button>
+      </div>
+      <Table columns={columns} rows={sampleRows.slice(0,6)} density="comfortable" selectable={true} class="demo-density" />
     </section>
 
     <section style="margin-top:16px;">
@@ -49,4 +52,18 @@ const sampleRows = Array.from({ length: 12 }).map((_, i) => ({
     </section>
 
   </Container>
+  <script type="module">
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!target) return;
+      if (target.id === 'density-toggle') {
+        const el = document.querySelector('.demo-density');
+        if (!el) return;
+        const current = el.getAttribute('data-density') || 'comfortable';
+        const next = current === 'comfortable' ? 'dense' : 'comfortable';
+        el.setAttribute('data-density', next);
+        target.setAttribute('aria-pressed', String(next === 'dense'));
+      }
+    });
+  </script>
 </Layout>
