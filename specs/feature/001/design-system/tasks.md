@@ -387,7 +387,7 @@ Acceptance: Supports semantic variants and clear states; tokens-only styling.
 Verify: Story shows each variant; assistive roles documented (status vs alert).
 STOP-AND-ESCALATE: If toast requires global state; keep it story-only in v1 or use a tiny island.
 
-- [ ] T032 [US4] Implement async and empty patterns (Skeleton/Spinner/Progress/EmptyState)
+- [x] T032 [US4] Implement async and empty patterns (Skeleton/Spinner/Progress/EmptyState)
 Scope: Provide consistent loading and empty-state UI patterns.
 Files: `src/components/ui/Skeleton.astro`, `src/components/ui/Spinner.astro`, `src/components/ui/Progress.astro`, `src/components/ui/EmptyState.astro`, `src/pages/ui/stories/states.astro`
 Acceptance: Reduced-motion respected; aria-busy/status guidance included in docs.

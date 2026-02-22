@@ -1,0 +1,60 @@
+---
+interface Props {
+  rows?: number | string;
+  variant?: 'text' | 'rect' | 'circle';
+  class?: string;
+}
+
+const {
+  rows = 1,
+  variant = 'text',
+  class: className = ''
+} = Astro.props as Props;
+
+const rowCount = typeof rows === 'string' ? parseInt(rows, 10) : rows;
+---
+
+<div class={`skeleton ${variant === 'circle' ? 'skeleton--circle' : variant === 'rect' ? 'skeleton--rect' : 'skeleton--text'} ${className}`} aria-hidden="true">
+  {variant === 'text'
+    ? Array.from({ length: Math.max(1, rowCount) }).map(() => <div class="skeleton-line" />)
+    : <div class="skeleton-fill" />
+  }
+</div>
+
+<style>
+.skeleton {
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: -100%;
+  width: 200%;
+  background: linear-gradient(90deg, var(--color-surface-muted), var(--color-surface-default), var(--color-surface-muted));
+  animation: shimmer var(--motion-duration-medium) linear infinite;
+  opacity: 0.9;
+}
+.skeleton--text .skeleton-line {
+  height: var(--space-2);
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: transparent;
+}
+.skeleton--rect .skeleton-fill {
+  height: calc(var(--space-3) * 2);
+  border-radius: var(--radius-md);
+}
+.skeleton--circle {
+  width: calc(var(--space-3) * 1.5);
+  height: calc(var(--space-3) * 1.5);
+  border-radius: 50%;
+}
+@keyframes shimmer { to { transform: translateX(50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after { animation: none; }
+}
+</style>

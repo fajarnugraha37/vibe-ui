@@ -1,0 +1,62 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from "../../../components/layout/Container.astro";
+import Spinner from "../../../components/ui/Spinner.astro";
+import Skeleton from "../../../components/ui/Skeleton.astro";
+import Progress from "../../../components/ui/Progress.astro";
+import EmptyState from "../../../components/ui/EmptyState.astro";
+import Button from "../../../components/ui/Button.astro";
+---
+
+<Layout title="States & Feedback">
+  <Container>
+    <h1>Loading, Empty & Progress states</h1>
+
+    <section>
+      <h2>Spinner</h2>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <Spinner />
+        <Spinner decorative={false} label="Loading data" />
+      </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Skeletons</h2>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:200px;">
+          <Skeleton rows="3" />
+        </div>
+        <div style="width:120px;">
+          <Skeleton variant="circle" />
+        </div>
+        <div style="width:300px;">
+          <Skeleton variant="rect" />
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Progress</h2>
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:400px;">
+        <Progress value="0" />
+        <Progress value="50" />
+        <Progress value="85" />
+      </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Empty State</h2>
+      <EmptyState>
+        <div slot="visual">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="var(--color-border-default)" stroke-width="2" fill="none" />
+          </svg>
+        </div>
+        <div slot="title">No results</div>
+        <div slot="description">Try adjusting your filters or create a new item.</div>
+        <div slot="actions"><Button variant="primary">Create</Button></div>
+      </EmptyState>
+    </section>
+
+  </Container>
+</Layout>
