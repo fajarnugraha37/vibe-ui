@@ -56,7 +56,9 @@ Acceptance: Folders exist and are tracked by git (placeholders committed).
 Verify: `git status` shows the new files; no other unrelated changes.
 STOP-AND-ESCALATE: If the repo uses a different structure already (document it and propose mapping).
 
-- [ ] T003 Update `README.md` to describe the design system workflow and story routes
+- [x] T003 Update `README.md` to describe the design system workflow and story routes
+
+Verify: README updated with commands, token locations, theme switching info, and /ui/stories; run `npm run dev` and open /ui/stories to verify.
 Scope: Replace the default Astro starter README with DS-specific usage instructions.
 Files: `README.md`
 Acceptance: README includes:
