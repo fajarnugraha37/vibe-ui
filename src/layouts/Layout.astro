@@ -4,14 +4,14 @@ import "../styles/global.css";
 import "../styles/generated/tokens.css";
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   image?: string;
   url?: string;
 }
 
 const {
-  title,
+  title = "Vibe UI",
   description = "Welcome to our site",
   image,
   url,

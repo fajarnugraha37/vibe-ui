@@ -1,0 +1,96 @@
+---
+import "../../styles/typography/ui.css";
+
+interface Props {
+  id?: string;
+  name?: string;
+  placeholder?: string;
+  value?: string;
+  type?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'number';
+  state?: 'default' | 'error' | 'success' | 'loading' | 'disabled';
+  size?: 'sm' | 'md' | 'lg';
+  required?: boolean;
+  readonly?: boolean;
+  class?: string;
+  error?: string;
+}
+
+const {
+  id,
+  name,
+  placeholder = '',
+  value = '',
+  type = 'text',
+  state = 'default',
+  size = 'md',
+  required = false,
+  readonly = false,
+  class: className = '',
+  error = ''
+} = Astro.props as Props;
+
+const inputId = id ?? (name ? `input-${name}` : undefined);
+const describedBy = error && inputId ? `${inputId}-error` : undefined;
+---
+
+<div class={`form-control ${className}`}>
+  <input
+    id={inputId}
+    name={name}
+    class={`input input--${size} input--${state}`}
+    type={type}
+    value={value}
+    placeholder={placeholder}
+    disabled={state === 'disabled' ? true : undefined}
+    readonly={readonly ? true : undefined}
+    aria-invalid={state === 'error' ? 'true' : 'false'}
+    aria-describedby={describedBy}
+    required={required ? true : undefined}
+  />
+  {state === 'loading' ? <span class="input-spinner" aria-hidden="true"></span> : null}
+  {error ? <p id={describedBy} class="input-error" role="alert">{error}</p> : null}
+</div>
+
+<style>
+.input {
+  width: 100%;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+  font: inherit;
+  box-sizing: border-box;
+}
+.input:focus {
+  outline: 2px solid var(--color-link-primary);
+  outline-offset: 2px;
+}
+.input--sm { padding: calc(var(--space-1)); font-size: 0.9rem; }
+.input--md { padding: var(--space-2); font-size: 1rem; }
+.input--lg { padding: var(--space-3); font-size: 1.05rem; }
+
+.input--error { border-color: var(--color-state-error); }
+.input--success { border-color: var(--color-state-success, var(--color-link-primary)); }
+.input--disabled { opacity: 0.6; cursor: not-allowed; }
+
+.input-error {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--color-state-error);
+}
+
+.input-spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid var(--color-surface-default);
+  border-left-color: transparent;
+  animation: spin var(--motion-duration-medium) linear infinite;
+  margin-left: 0.5rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.form-control { position: relative; display: block; }
+</style>

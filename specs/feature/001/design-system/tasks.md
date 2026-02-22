@@ -270,7 +270,9 @@ STOP-AND-ESCALATE: If false positives occur, narrow scope with explicit allowlis
 **Independent Test**: Open a form story page and validate:
 labels/help/errors, blur validation behavior, loading/disabled, keyboard navigation, responsive 2-col to 1-col.
 
-- [ ] T022 [US2] Implement `Input` + `Textarea` primitives with validation states
+- [x] T022 [US2] Implement `Input` + `Textarea` primitives with validation states
+
+Verify: Created src/components/ui/Input.astro and src/components/ui/Textarea.astro with validation states (default/error/success/loading/disabled) and story at src/pages/ui/stories/inputs.astro. Manual test: run `npm run dev` and open /ui/stories/inputs to confirm inputs and textareas render, aria-invalid is set on errors, and error messages use role="alert".
 Scope: Provide text inputs with semantic label/description/error wiring support.
 Files: `src/components/ui/Input.astro`, `src/components/ui/Textarea.astro`, `src/pages/ui/stories/inputs.astro`, `src/pages/docs/design-system/input.astro`
 Acceptance: Inputs support states:

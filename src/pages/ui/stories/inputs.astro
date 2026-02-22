@@ -1,0 +1,42 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from '../../../components/layout/Container.astro';
+import Input from '../../../components/ui/Input.astro';
+import Textarea from '../../../components/ui/Textarea.astro';
+---
+
+<Layout>
+  <Container>
+    <h1>Inputs & Textareas</h1>
+
+    <section>
+      <h2>Input sizes</h2>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <label style="display:flex;flex-direction:column;"><span>Small</span><Input size="sm" placeholder="Small input" name="small" /></label>
+        <label style="display:flex;flex-direction:column;"><span>Medium</span><Input size="md" placeholder="Medium input" name="medium" /></label>
+        <label style="display:flex;flex-direction:column;"><span>Large</span><Input size="lg" placeholder="Large input" name="large" /></label>
+      </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Validation states</h2>
+      <div style="display:flex;gap:12px;flex-direction:column;max-width:480px;">
+        <label>Default<input is:raw /><Input placeholder="default" name="def" /></label>
+        <label>Error<Input state="error" error="This field is required" name="err" /></label>
+        <label>Success<Input state="success" value="Looks good" name="ok" /></label>
+        <label>Loading<Input state="loading" placeholder="Loading..." name="load" /></label>
+        <label>Disabled<Input state="disabled" placeholder="Disabled" name="dis" /></label>
+      </div>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Textarea</h2>
+      <div style="max-width:640px;display:flex;flex-direction:column;gap:12px;">
+        <label>Default<Textarea placeholder="Write something..." name="t1" /></label>
+        <label>Error<Textarea state="error" error="Please enter at least 20 characters" name="t2"> </Textarea></label>
+        <label>Disabled<Textarea state="disabled" placeholder="Disabled" name="t3" /></label>
+      </div>
+    </section>
+
+  </Container>
+</Layout>
