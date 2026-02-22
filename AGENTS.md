@@ -3,6 +3,7 @@
 Auto-generated from all feature plans. Last updated: 2026-02-23
 
 ## Active Technologies
+- N/A (design system deliverables + example pages; no backend required) (feature/001/design-system)
 
 - TypeScript (Node.js; project uses Astro) + Astro, Tailwind CSS, React (islands only), AlpineJS (small behaviors only) (feature/001/design-system)
 
@@ -23,8 +24,10 @@ npm test; npm run lint
 TypeScript (Node.js; project uses Astro): Follow standard conventions
 
 ## Recent Changes
-
 - feature/001/design-system: Added TypeScript (Node.js; project uses Astro) + Astro, Tailwind CSS, React (islands only), AlpineJS (small behaviors only)
+- feature/001/design-system: Added TypeScript (Node.js; project uses Astro) + Astro, Tailwind CSS, React (islands only), AlpineJS (small behaviors only)
+- feature/001/design-system: Added TypeScript (Node.js; project uses Astro) + Astro, Tailwind CSS, React (islands only), AlpineJS (small behaviors only)
+
 
 <!-- MANUAL ADDITIONS START -->
 <!--
