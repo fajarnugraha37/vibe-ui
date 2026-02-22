@@ -165,7 +165,9 @@ Acceptance: Prose wrapper styles headings/lists/quotes/code blocks; UI scale rem
 Verify: Create a temporary page snippet under `src/pages/ui/stories/typography.astro` (later refined).
 STOP-AND-ESCALATE: If prose styling requires non-token values; add tokens first.
 
-- [ ] T013 Implement motion tokens and reduced-motion policy
+- [x] T013 Implement motion tokens and reduced-motion policy
+
+Verify: Created src/styles/motion/tokens.css with transition utilities referencing motion tokens (var(--motion-duration-fast), var(--motion-easing-default)). Reduced-motion media query disables non-essential transitions and animations. Quick test: apply .transition-default to an element and confirm transitions are removed when OS sets prefers-reduced-motion.
 Scope: Define transition durations/easings as tokens and enforce reduced-motion behavior.
 Files: `src/styles/motion/tokens.css`, `src/styles/global.css`
 Acceptance: Motion utilities reference tokens; reduced motion disables non-essential animation.

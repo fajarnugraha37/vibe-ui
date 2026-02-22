@@ -1,0 +1,21 @@
+/* DO NOT EDIT — motion utilities for T013 */
+
+/* Motion utilities referencing token variables */
+.transition-default {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: var(--motion-duration-medium);
+  transition-timing-function: var(--motion-easing-default);
+}
+
+.motion-fast { transition-duration: var(--motion-duration-fast) !important; }
+.motion-medium { transition-duration: var(--motion-duration-medium) !important; }
+.motion-easing-default { transition-timing-function: var(--motion-easing-default) !important; }
+
+/* Reduced motion preference: disable non-essential transitions/animations */
+@media (prefers-reduced-motion: reduce) {
+  .transition-default, .motion-fast, .motion-medium, .motion-easing-default {
+    transition-duration: 0.001ms !important;
+    transition-timing-function: linear !important;
+    animation-duration: 0.001ms !important;
+  }
+}
