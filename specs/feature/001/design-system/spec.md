@@ -1,11 +1,21 @@
 # Feature Specification: SaaS Design System (Tokens + Components + Stories)
 
-**Feature Branch**: `001-design-system`  
+**Feature Branch**: `feature/001/design-system`  
 **Created**: 2026-02-22  
 **Status**: Draft  
 **Input**: Create a token-first design system for a SaaS web app and public site
 (marketing + blog + account/app) with a complete component catalog, full states,
 accessibility by default, and baseline "stories" usable for visual regression.
+
+## Clarifications
+
+### Session 2026-02-22
+
+- Q: High-contrast mode control? → A: OS-driven default + manual override (persisted)
+- Q: Localization / RTL support baseline? → A: LTR multi-language support (handle long strings; no RTL)
+- Q: Chat citation contract (minimum)? → A: Inline citation badges + citations list section
+- Q: Default table density modes? → A: Comfortable default + optional dense mode
+- Q: Form validation timing default? → A: Validate on blur + on submit
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -66,6 +76,9 @@ responsive 2-col desktop to 1-col mobile behavior.
 2. **Given** a form submission in progress, **When** the user attempts to resubmit,
    **Then** inputs and actions reflect loading/disabled states and success/error outcomes
    are communicated clearly (including assistive tech status where applicable).
+3. **Given** a form field has invalid input, **When** the user leaves the field (blur),
+   **Then** validation feedback is shown immediately and consistently, without requiring
+   a full form submit.
 
 ---
 
@@ -158,6 +171,9 @@ navigation, `prefers-reduced-motion`, and consistent visual tokens across overla
   medium density for dashboards and clear, helpful form UX.
 - **FR-003**: Design system MUST be mobile-first: desktop spacing feels roomy; mobile spacing
   is compact while staying readable and tappable.
+- **FR-004**: Design system MUST support LTR multi-language content: components MUST tolerate
+  long labels, helper text, error messages, and dynamic content without breaking layout or
+  truncating critical meaning. RTL is out of scope for this feature.
 
 #### Foundations Inventory (Tokens + Themes)
 
@@ -168,6 +184,8 @@ navigation, `prefers-reduced-motion`, and consistent visual tokens across overla
 - **FR-011a**: Theme configuration MUST be tunable by changing a small set of root inputs
   (at minimum, the primary accent), with derived semantic roles updating consistently.
   The system MUST NOT require hand-editing many unrelated tokens for normal theme changes.
+- **FR-011b**: High-contrast mode MUST default to OS/browser preference and MUST support a
+  manual user override that is persisted for deterministic review and QA.
 - **FR-012**: System MUST include two typography scales: UI scale (dashboards/forms) and
   prose scale (blog/marketing) with a prose wrapper that styles headings/lists/quotes/code.
 - **FR-013**: System MUST define spacing/radius/shadow/motion tokens with a consistent rhythm
@@ -219,7 +237,7 @@ navigation, `prefers-reduced-motion`, and consistent visual tokens across overla
 | Drawer | left/right/bottom | n/a | open/closing | focus management; escape; inert background | becomes primary nav on mobile |
 | DropdownMenu/Popover/Tooltip | anchored | n/a | open/close | keyboard navigation; aria-expanded where relevant | avoid off-screen rendering; touch-friendly fallbacks |
 | Tabs/Segmented | default | sm/md | active/focus/disabled | roving tab index; aria-selected | overflow handling on small screens |
-| Table/DataGrid | default/dense | n/a | empty/loading/error/selected | headers association; keyboard reachable actions | degrade to cards/lists on mobile |
+| Table/DataGrid | comfortable/dense | n/a | empty/loading/error/selected | headers association; keyboard reachable actions | degrade to cards/lists on mobile |
 | Pagination | default | sm/md | current/disabled | aria-current; next/prev labels | compact layout on mobile |
 | Badge/Tag/Chip | neutral/semantic | sm/md | default/disabled (if clickable) | button semantics if interactive | wrap and truncate rules |
 | Toast/Alert/Inline message | info/success/warn/error | n/a | show/dismiss | role=status/alert; focus rules if actions | avoid covering critical controls on mobile |
@@ -244,6 +262,9 @@ navigation, `prefers-reduced-motion`, and consistent visual tokens across overla
   and MUST support admin-like flows with clear success/error outcomes.
 - **FR-062**: Chat surfaces MUST use AI semantic tokens and provide readable citations,
   uncertainty messaging, and tool-run status styling without one-off CSS overrides.
+- **FR-063**: Chat citation UI MUST include, at minimum:
+  inline citation badges and a citations list section for the message/screen, using
+  AI semantic tokens to ensure consistent styling across themes.
 
 #### Explicit Decisions (With Tradeoffs)
 

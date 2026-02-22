@@ -2,7 +2,7 @@
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning  
 **Created**: 2026-02-22  
-**Feature**: `specs/001-design-system/spec.md`
+**Feature**: `specs/feature/001/design-system/spec.md`
 
 ## Content Quality
 
