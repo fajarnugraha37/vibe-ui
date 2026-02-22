@@ -27,7 +27,8 @@
     "tailwindcss": "^4.2.0"
   },
   "devDependencies": {
-    "vitest": "^1.2.1",
-    "@playwright/test": "^1.40.0"
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^25.3.0",
+    "vitest": "^1.2.1"
   }
 }
