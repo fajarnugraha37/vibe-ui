@@ -34,10 +34,11 @@
 Reference: `.specify/memory/constitution.md`
 
 - Token compliance: semantic tokens only (no raw hex/ad-hoc colors in components)
-- Theming: light/dark via `data-theme` + CSS variables; Tailwind maps to tokens
+- Theming: light/dark + high-contrast via token overrides; Tailwind maps to tokens
+- Design system first: check existing tokens/components; extend before creating new
 - Accessibility: keyboard nav, `:focus-visible` ring, ARIA/semantics, reduced motion
 - Interactivity: minimal JS; islands only; avoid global SPA; hydration scoped
-- Component states: default/hover/focus/disabled/loading/error (success where relevant)
+- Component states: default/hover/focus/active/disabled/loading/error (success where relevant)
 - Responsive rules: mobile-first; tables -> cards on mobile; sidebar -> drawer; forms 2-col -> 1-col
 - Layout rhythm: max-w 1200, padding 24, spacing rhythm 4/8/12/16/24/32 (tokenized)
 - Typography: separate UI scale vs prose scale; blog uses a prose wrapper with styled code blocks

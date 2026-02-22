@@ -1,11 +1,15 @@
 <!--
 Sync Impact Report
 
-- Version change: 1.0.0 -> 1.1.0
-- Modified principles: none
-- Added sections: none
+- Version change: 1.1.0 -> 1.2.0
+- Modified principles:
+  - I. Semantic Tokens + Theme System -> I. Design Tokens + Theme System
+  - II. Accessibility + Interaction States (expanded: WCAG 2.2 baseline + active state)
+- Added sections:
+  - VI. Design System First: Reuse Before New + Token Architecture + Naming Contract
 - Removed sections: none
-- Notes: Expanded Workflow & Quality Gates with cheap-AI task authoring + progress discipline.
+- Notes: Added design-system-first rules, token architecture + naming contract, and
+  high-contrast theme + WCAG 2.2 baseline requirements.
 - Templates requiring updates:
   - ✅ .specify/templates/plan-template.md
   - ✅ .specify/templates/spec-template.md
@@ -18,11 +22,15 @@ Sync Impact Report
 
 ## Core Principles
 
-### I. Semantic Tokens + Theme System (NON-NEGOTIABLE)
-- All design decisions MUST be expressed as semantic tokens (CSS variables) for:
-  colors, typography, spacing, radius, shadow, and motion.
-- Light and dark themes MUST be supported via `data-theme` (or equivalent) and token
-  value overrides. Components MUST NOT special-case theme logic.
+### I. Design Tokens + Theme System (NON-NEGOTIABLE)
+- All design decisions MUST be expressed as tokens (CSS variables) for: colors,
+  typography, spacing, radius, shadow, and motion.
+- Themes MUST include light and dark, plus a high-contrast variant. Theme switching
+  MUST be implemented via token value overrides (e.g., `data-theme`, and optionally
+  `data-contrast`), and components MUST NOT special-case theme logic.
+- Color tokens MUST cover:
+  semantic surfaces (bg/surface/elevation), borders, text roles, and state colors
+  (info/success/warn/error), plus link styling rules (link/hover/visited/focus).
 - Components MUST NOT use raw hex values or ad-hoc colors. Styling MUST reference
   tokens only (e.g., Tailwind classes mapped to `hsl(var(--token))`).
 - Tailwind configuration MUST map semantic color tokens to `hsl(var(--token))` and
@@ -33,6 +41,8 @@ Sync Impact Report
 Rationale: A token-first system ensures consistent, themeable UI without drift.
 
 ### II. Accessibility + Interaction States (NON-NEGOTIABLE)
+- Minimum target accessibility is WCAG 2.2. For SaaS dashboards and forms, the
+  baseline is WCAG 2.2 AA unless an explicit, documented exception is approved.
 - Accessibility is a release gate: keyboard navigation, semantic HTML, and correct
   ARIA labeling MUST be implemented for all interactive surfaces.
 - Focus visibility MUST be preserved (`:focus-visible` ring) and focus management
@@ -40,8 +50,8 @@ Rationale: A token-first system ensures consistent, themeable UI without drift.
 - Motion MUST respect user preference: `prefers-reduced-motion` MUST reduce or
   remove non-essential animation without breaking usability.
 - Every interactive component MUST implement, at minimum:
-  default, hover, focus, disabled, loading, and error states (and success where it
-  changes behavior, e.g., forms).
+  default, hover, focus, active, disabled, loading, and error states (and success
+  where it changes behavior, e.g., forms).
 - Loading behavior MUST be clear: use skeletons/spinners where appropriate and
   ensure assistive tech gets status updates (`aria-busy`, `aria-live` as needed).
 - Form UX MUST follow:
@@ -93,6 +103,37 @@ Rationale: A predictable layout system enables fast, consistent UI delivery.
 Rationale: UI and prose have different readability needs; mixing scales causes
 inconsistent hierarchy and visual noise.
 
+### VI. Design System First: Reuse Before New + Token Architecture + Naming Contract
+- For any request to create a component, composite, or page, the approach MUST be
+  system design first:
+  check existing tokens and existing primitives/composites before creating new.
+  Extending existing primitives is preferred over creating new variants.
+- Components, composites, and pages MUST NOT introduce raw styling values:
+  no raw hex colors, no arbitrary spacing/sizing/typography/radius/shadow/motion.
+  All styling MUST flow through tokens (CSS variables) surfaced via Tailwind mapping.
+- Token architecture MUST follow a three-layer model to avoid theme/scale explosion:
+  foundation tokens (e.g., `space.16`, `radius.3`, `color.neutral.900`),
+  semantic/role tokens (e.g., `color.text.primary`, `color.bg.surface`),
+  and component tokens (e.g., `chat.message.user.bg`, `button.primary.bg`).
+  AI-specific semantic tokens are first-class where needed (e.g., `color.ai.citation`,
+  `color.ai.uncertainty`, `color.ai.toolRun`, `color.ai.blocked`).
+- Naming contract MUST be consistent:
+  - Tokens MUST use dot-separated, lowercase names with stable domains
+    (e.g., `color.*`, `space.*`, `radius.*`, `shadow.*`, `motion.*`, `font.*`).
+  - Components MUST use clear, purpose-based names. Primitives are small and reusable;
+    composites are composed from primitives; pages compose composites.
+- New tokens MUST NOT be added without:
+  updating the token definitions for all supported modes (light/dark/high-contrast),
+  updating Tailwind mappings, and updating documentation.
+- Documentation policy: every primitive MUST include usage examples plus "do/don't"
+  guidance, and MUST explain which tokens it uses (semantic roles, not raw values).
+- Theme customization MUST be designed so changing the primary accent token (and
+  a small set of root theme inputs) updates derived semantic roles consistently,
+  rather than hand-editing many unrelated tokens.
+
+Rationale: A design-system-first approach keeps the UI consistent, scalable, and
+maintainable across marketing, blog, and SaaS dashboard surfaces.
+
 ## Technology Stack
 
 - Framework: Astro (SSR/render-first, islands architecture)
@@ -112,7 +153,7 @@ Non-negotiable implementation constraints:
 
 Project build order (for foundational UI work):
 1. Define tokens (colors, typography, spacing, radius, shadow, motion) and theme
-   switching (light/dark).
+   switching (light/dark/high-contrast).
 2. Map tokens into Tailwind configuration and add base styles (body defaults,
    focus ring utilities).
 3. Create layout primitives in Astro for: landing/marketing, blog, dashboard,
@@ -124,6 +165,8 @@ Project build order (for foundational UI work):
 Required review gates (apply to all UI work):
 - Token compliance: no raw hex colors in components; use semantic tokens via
   Tailwind mappings.
+- Design system first: verify existing tokens/components were checked; prefer
+  extending primitives; if a new primitive/token is added, include docs + mappings.
 - States: interactive components include default/hover/focus/disabled/loading/error
   (and success where relevant).
 - Accessibility: keyboard navigation works, focus ring visible, ARIA/semantics
@@ -158,6 +201,7 @@ Task authoring + execution discipline (cheap AI-ready):
   - Task lists MUST be cheap-AI executable: explicit steps, progress updates, and
     explicit clarification tasks for unknowns.
   - PR reviews MUST explicitly confirm token compliance, a11y requirements, and
-    responsive behavior for any UI-affecting changes.
+    responsive behavior, and design-system-first reuse rules for any UI-affecting
+    changes.
 
-**Version**: 1.1.0 | **Ratified**: 2026-02-22 | **Last Amended**: 2026-02-22
+**Version**: 1.2.0 | **Ratified**: 2026-02-22 | **Last Amended**: 2026-02-22
