@@ -1,15 +1,12 @@
 <!--
 Sync Impact Report
 
-- Version change: 1.1.0 -> 1.2.0
-- Modified principles:
-  - I. Semantic Tokens + Theme System -> I. Design Tokens + Theme System
-  - II. Accessibility + Interaction States (expanded: WCAG 2.2 baseline + active state)
-- Added sections:
-  - VI. Design System First: Reuse Before New + Token Architecture + Naming Contract
+- Version change: 1.2.0 -> 1.3.0
+- Modified principles: none
+- Added sections: none
 - Removed sections: none
-- Notes: Added design-system-first rules, token architecture + naming contract, and
-  high-contrast theme + WCAG 2.2 baseline requirements.
+- Notes: Expanded cheap-model task authoring constraints (self-contained, explicit,
+  verifiable steps; stop-and-clarify rules).
 - Templates requiring updates:
   - ✅ .specify/templates/plan-template.md
   - ✅ .specify/templates/spec-template.md
@@ -31,6 +28,9 @@ Sync Impact Report
 - Color tokens MUST cover:
   semantic surfaces (bg/surface/elevation), borders, text roles, and state colors
   (info/success/warn/error), plus link styling rules (link/hover/visited/focus).
+- Conceptual reference: use a role/value mindset similar to IBM Carbon theme tokens,
+  and treat foundation tokens as the base of the system (aligned with USWDS-style
+  token thinking). This is guidance, not a dependency.
 - Components MUST NOT use raw hex values or ad-hoc colors. Styling MUST reference
   tokens only (e.g., Tailwind classes mapped to `hsl(var(--token))`).
 - Tailwind configuration MUST map semantic color tokens to `hsl(var(--token))` and
@@ -145,7 +145,7 @@ maintainable across marketing, blog, and SaaS dashboard surfaces.
 
 Non-negotiable implementation constraints:
 - Semantic tokens only in components (no ad-hoc hex colors or untracked styles).
-- Theme values MUST be provided for both light and dark via `data-theme`.
+- Theme values MUST be provided for light/dark and high-contrast via token overrides.
 - Spacing/radius/shadow/motion/typography MUST be defined as tokens and surfaced
   through Tailwind `theme.extend`.
 
@@ -167,7 +167,7 @@ Required review gates (apply to all UI work):
   Tailwind mappings.
 - Design system first: verify existing tokens/components were checked; prefer
   extending primitives; if a new primitive/token is added, include docs + mappings.
-- States: interactive components include default/hover/focus/disabled/loading/error
+- States: interactive components include default/hover/active/focus/disabled/loading/error
   (and success where relevant).
 - Accessibility: keyboard navigation works, focus ring visible, ARIA/semantics
   correct, reduced motion supported.
@@ -176,6 +176,18 @@ Required review gates (apply to all UI work):
 Task authoring + execution discipline (cheap AI-ready):
 - Tasks MUST be detailed and followable by a human or a low-context, low-reasoning
   agent. Each task MUST include explicit file paths and concrete steps.
+- Tasks MUST be self-contained for cheap models:
+  include the minimum required context inline (short excerpts or pointers), and do
+  not rely on implicit repo knowledge or "as above" references.
+- Each task MUST specify:
+  inputs (files/paths), exact edits (what to add/remove), commands to run (if any),
+  expected outputs, and verification steps (what proves it is done).
+- Tasks MUST be written as single-responsibility work items:
+  one primary outcome per task; avoid bundling unrelated changes.
+- Tasks MUST include a stop condition:
+  if any required detail is missing/ambiguous, the assignee MUST NOT guess and MUST
+  add/complete a `CLARIFY` task that states the question, options, and what is
+  blocked until clarified.
 - Before starting a task, the assignee MUST update the task entry to indicate it is
   in progress. After finishing, the assignee MUST mark the task completed and note
   what verification was performed.
@@ -200,8 +212,8 @@ Task authoring + execution discipline (cheap AI-ready):
   - Feature plans MUST include a "Constitution Check" gate.
   - Task lists MUST be cheap-AI executable: explicit steps, progress updates, and
     explicit clarification tasks for unknowns.
-  - PR reviews MUST explicitly confirm token compliance, a11y requirements, and
-    responsive behavior, and design-system-first reuse rules for any UI-affecting
-    changes.
+- PR reviews MUST explicitly confirm token compliance, a11y requirements, and
+  responsive behavior, and design-system-first reuse rules for any UI-affecting
+  changes.
 
-**Version**: 1.2.0 | **Ratified**: 2026-02-22 | **Last Amended**: 2026-02-22
+**Version**: 1.3.0 | **Ratified**: 2026-02-22 | **Last Amended**: 2026-02-22

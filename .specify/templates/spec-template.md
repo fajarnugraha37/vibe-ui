@@ -85,11 +85,17 @@
 ### Constitution Constraints *(mandatory for UI work)*
 
 - Use semantic tokens only (no raw hex/ad-hoc colors in components).
-- Implement light/dark theming via `data-theme` and CSS variables.
+- Implement themes via token overrides: light/dark plus high-contrast where required.
+- Design system first: check existing tokens/components; extend before creating new.
+- New tokens MUST NOT be introduced without updating token definitions (all themes),
+  Tailwind mappings, and documentation.
 - Ensure a11y gates: keyboard nav, visible focus ring, ARIA/semantics, reduced motion.
 - Keep JS minimal: islands only; avoid turning the site into a global SPA.
-- Implement required interaction states for UI elements: hover/focus/disabled/loading/error (success where relevant).
+- Implement required interaction states: default/hover/active/focus/disabled/loading/error
+  (success where relevant).
 - Follow responsive rules: tables -> cards on mobile; sidebar -> drawer; forms 2-col desktop -> 1-col mobile.
+- Primitive components MUST include usage examples plus "do/don't" guidance in docs
+  when introduced or materially changed.
 
 ### Functional Requirements
 
