@@ -1,0 +1,23 @@
+---
+interface Props {
+  variant?: 'info' | 'success' | 'error' | 'warn';
+  title?: string;
+  class?: string;
+}
+const { variant = 'info', title = '', class: className = '' } = Astro.props as Props;
+---
+
+<div class={`alert alert-${variant} ${className}`} role={variant === 'error' ? 'alert' : 'status'} aria-live="polite">
+  {title ? <div class="alert-title">{title}</div> : null}
+  <div class="alert-body"><slot /></div>
+</div>
+
+<style>
+.alert { padding: 12px; border-radius: 8px; background: var(--color-surface-default); border: 1px solid var(--color-border-default); color: var(--color-text-primary); }
+.alert + .alert { margin-top: 12px; }
+.alert-title { font-weight: 600; margin-bottom: 6px; }
+.alert-info { border-left: 4px solid var(--color-link-primary); }
+.alert-success { border-left: 4px solid var(--color-state-success); }
+.alert-error { border-left: 4px solid var(--color-state-error); }
+.alert-warn { border-left: 4px solid var(--color-state-warning); }
+</style>

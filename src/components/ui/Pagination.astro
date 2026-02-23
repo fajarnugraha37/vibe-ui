@@ -1,0 +1,22 @@
+---
+interface Props { page?: number; total?: number; baseUrl?: string; class?: string }
+const { page = 1, total = 1, baseUrl = '#', class: className = '' } = Astro.props as Props;
+---
+
+<nav class={`pagination ${className}`} role="navigation" aria-label="Pagination">
+  <a class="pagination__prev" href={`${baseUrl}?page=${Math.max(1, page-1)}`} aria-disabled={page <= 1}>Previous</a>
+  <div class="pagination__pages">
+    {Array.from({ length: total }).map((_, i) => (
+      <a class={`pagination__page ${i+1 === page ? 'is-current' : ''}`} href={`${baseUrl}?page=${i+1}`}>{i+1}</a>
+    ))}
+  </div>
+  <a class="pagination__next" href={`${baseUrl}?page=${Math.min(total, page+1)}`} aria-disabled={page >= total}>Next</a>
+</nav>
+
+<style>
+.pagination { display:flex; align-items:center; gap:0.5rem; }
+.pagination__prev, .pagination__next { padding:6px 10px; border-radius:8px; background:var(--color-surface-default); border:1px solid var(--color-border-default); text-decoration:none; color:var(--color-text-primary); }
+.pagination__pages { display:flex; gap:6px; }
+.pagination__page { padding:6px 8px; border-radius:6px; text-decoration:none; color:var(--color-text-primary); }
+.pagination__page.is-current { background:var(--color-link-primary); color:var(--color-surface-default); font-weight:600; }
+</style>

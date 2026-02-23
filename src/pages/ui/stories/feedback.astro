@@ -1,0 +1,59 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from '../../../components/layout/Container.astro';
+import Alert from '../../../components/ui/Alert.astro';
+import InlineMessage from '../../../components/ui/InlineMessage.astro';
+import Toast from '../../../components/ui/Toast.astro';
+---
+
+<Layout>
+  <Container>
+    <h1>Feedback primitives</h1>
+
+    <section>
+      <h2>Alerts</h2>
+      <Alert variant="info" title="Info">This is an informational alert.</Alert>
+      <Alert variant="success" title="Success">Operation completed successfully.</Alert>
+      <Alert variant="warn" title="Warning">Be careful with this action.</Alert>
+      <Alert variant="error" title="Error">Something went wrong.</Alert>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Inline messages</h2>
+      <p>Use inline messages for compact feedback: <InlineMessage variant="success">Saved</InlineMessage> within text.</p>
+    </section>
+
+    <section style="margin-top:16px;">
+      <h2>Toasts (demo)</h2>
+      <button id="show-toast" class="btn btn-ghost">Show toast</button>
+      <Toast>
+        <div class="toast" id="demo-toast" data-visible="false">Saved successfully</div>
+      </Toast>
+    </section>
+
+  </Container>
+
+  <script type="module">
+    (function () {
+      function showDemoToast() {
+        const t = document.getElementById('demo-toast');
+        if (!t) return;
+        t.setAttribute('data-visible', 'true');
+        setTimeout(() => t.setAttribute('data-visible', 'false'), 2200);
+      }
+
+      function initToast() {
+        const btn = document.getElementById('show-toast');
+        if (btn) btn.addEventListener('click', showDemoToast);
+        // Expose for manual trigger in devtools
+        try { window.__vibe_show_demo_toast = showDemoToast; } catch (e) { /* noop */ }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initToast);
+      } else {
+        initToast();
+      }
+    })();
+  </script>
+</Layout>

@@ -1,0 +1,32 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  class?: string;
+}
+
+const {
+  title = 'Nothing here',
+  description = 'There is nothing to display right now.',
+  class: className = ''
+} = Astro.props as Props;
+---
+
+<section class={`emptystate ${className}`} role="status" aria-live="polite">
+  <div class="emptystate-visual"><slot name="visual" /></div>
+  <h3 class="emptystate-title">{title}</h3>
+  <p class="emptystate-desc">{description}</p>
+  <div class="emptystate-actions"><slot name="actions" /></div>
+</section>
+
+<style>
+.emptystate {
+  text-align: center;
+  padding: var(--space-3);
+  color: var(--color-text-secondary);
+}
+.emptystate-visual { margin-bottom: var(--space-2); }
+.emptystate-title { margin: 0 0 var(--space-2) 0; color: var(--color-text-primary); }
+.emptystate-desc { margin: 0 0 var(--space-3) 0; }
+.emptystate-actions { display: flex; gap: var(--space-2); justify-content: center; }
+</style>

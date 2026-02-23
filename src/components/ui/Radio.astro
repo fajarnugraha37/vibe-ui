@@ -1,0 +1,63 @@
+---
+import "../../styles/typography/ui.css";
+
+interface Props {
+  id?: string;
+  name?: string;
+  value?: string;
+  checked?: boolean;
+  disabled?: boolean;
+  required?: boolean;
+  label?: string;
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  value,
+  checked = false,
+  disabled = false,
+  required = false,
+  label = '',
+  size = 'md',
+  class: className = ''
+} = Astro.props as Props;
+
+const inputId = id ?? (name && value ? `radio-${name}-${value}` : undefined);
+---
+
+<label class={`radio ${className}`}>
+  <input
+    id={inputId}
+    name={name}
+    type="radio"
+    class={`radio__input radio__input--${size}`}
+    value={value}
+    checked={checked ? true : undefined}
+    disabled={disabled ? true : undefined}
+    required={required ? true : undefined}
+    aria-checked={checked ? 'true' : undefined}
+  />
+  <span class="radio__dot" aria-hidden="true"></span>
+  {label && <span class="radio__label">{label}</span>}
+</label>
+
+<style>
+.radio { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; user-select: none; }
+.radio__input { position: absolute; opacity: 0; width: 0; height: 0; }
+.radio__dot { width: 1rem; height: 1rem; border-radius: 999px; border: 1px solid var(--color-border-default); background: var(--color-surface-default); display: inline-block; transition: background 120ms ease, border-color 120ms ease; position: relative; }
+.radio__dot::after { content: ''; width: 0.55rem; height: 0.55rem; border-radius: 999px; background: var(--color-link-primary); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); transition: transform 120ms ease; }
+.radio__input:checked + .radio__dot { border-color: var(--color-link-primary); background: var(--color-surface-default); }
+.radio__input:checked + .radio__dot::after { transform: translate(-50%, -50%) scale(1); }
+.radio__label { font-size: 0.95rem; color: var(--color-text-primary); }
+
+/* sizes */
+.radio__input--sm + .radio__dot { width: 0.875rem; height: 0.875rem; }
+.radio__input--lg + .radio__dot { width: 1.25rem; height: 1.25rem; }
+
+/* disabled */
+.radio__input[disabled] + .radio__dot { opacity: 0.6; cursor: not-allowed; }
+.radio__input[disabled] ~ .radio__label { opacity: 0.6; }
+</style>

@@ -1,20 +1,25 @@
 ---
+import ThemeControls from "../components/nav/ThemeControls.astro";
 import "../styles/global.css";
+import "../styles/generated/tokens.css";
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   image?: string;
   url?: string;
 }
 
 const {
-  title,
+  title = "Vibe UI",
   description = "Welcome to our site",
   image,
   url,
 } = Astro.props as Props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost:4321');
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site ?? "http://localhost:4321",
+);
 ---
 
 <!doctype html>
@@ -27,6 +32,28 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+
+    <script>
+      /* Theme init to avoid FOUC: sets data-theme and data-contrast on <html> before styles load */ (function () {
+        try {
+          var lsTheme = localStorage.getItem("vibe-theme");
+          var lsContrast = localStorage.getItem("vibe-contrast");
+          var prefersDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var prefersHigh =
+            window.matchMedia &&
+            (window.matchMedia("(prefers-contrast: more)").matches ||
+              window.matchMedia("(prefers-contrast: high)").matches);
+          var theme = lsTheme || (prefersDark ? "dark" : "light");
+          var contrast = lsContrast || (prefersHigh ? "high" : "default");
+          var el = document.documentElement;
+          el &&
+            (el.setAttribute("data-theme", theme),
+            el.setAttribute("data-contrast", contrast));
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -49,6 +76,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost
     <title>{title}</title>
   </head>
   <body>
+    <ThemeControls />
     <slot />
   </body>
 </html>

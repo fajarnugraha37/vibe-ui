@@ -1,0 +1,40 @@
+{
+  "version": "1",
+  "description": "Token registry v1 — token definitions (themes in themes.v1.json).",
+  "tokens": [
+    { "id": "space.0", "layer": "foundation", "type": "space", "value": "0px", "description": "Zero spacing" },
+    { "id": "space.1", "layer": "foundation", "type": "space", "value": "4px", "description": "Small spacing" },
+    { "id": "space.2", "layer": "foundation", "type": "space", "value": "8px", "description": "Base spacing" },
+    { "id": "space.3", "layer": "foundation", "type": "space", "value": "16px", "description": "Medium spacing" },
+
+    { "id": "radius.sm", "layer": "foundation", "type": "radius", "value": "4px", "description": "Small border radius" },
+    { "id": "radius.md", "layer": "foundation", "type": "radius", "value": "8px", "description": "Medium border radius" },
+    { "id": "radius.lg", "layer": "foundation", "type": "radius", "value": "12px", "description": "Large border radius" },
+
+    { "id": "font.family.base", "layer": "foundation", "type": "font", "value": "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial", "description": "Base UI font stack" },
+
+    { "id": "motion.duration.fast", "layer": "foundation", "type": "motion", "value": "150ms", "description": "Fast motion duration" },
+    { "id": "motion.duration.medium", "layer": "foundation", "type": "motion", "value": "250ms", "description": "Medium motion duration" },
+    { "id": "motion.easing.default", "layer": "foundation", "type": "motion", "value": "cubic-bezier(0.2,0.8,0.2,1)", "description": "Default easing" },
+
+    { "id": "color.surface.default", "layer": "semantic", "type": "color", "description": "Surface background role; theme provides values" },
+    { "id": "color.surface.muted", "layer": "semantic", "type": "color", "description": "Muted surface" },
+
+    { "id": "color.text.primary", "layer": "semantic", "type": "color", "description": "Primary text color" },
+    { "id": "color.text.secondary", "layer": "semantic", "type": "color", "description": "Secondary text color" },
+
+    { "id": "color.border.default", "layer": "semantic", "type": "color", "description": "Default border color" },
+
+    { "id": "color.state.error", "layer": "semantic", "type": "color", "description": "Error state role" },
+    { "id": "color.state.success", "layer": "semantic", "type": "color", "description": "Success state role" },
+
+    { "id": "color.link.primary", "layer": "semantic", "type": "color", "description": "Primary link role" },
+    { "id": "color.ring", "layer": "semantic", "type": "color", "description": "Focus ring role" },
+
+    { "id": "component.button.bg", "layer": "component", "type": "color", "description": "Button background role (map to semantic tokens or variants)" },
+    { "id": "component.button.text", "layer": "component", "type": "color", "description": "Button text role" },
+    { "id": "component.input.border", "layer": "component", "type": "color", "description": "Input border role" },
+    { "id": "component.formfield.spacing", "layer": "component", "type": "space", "description": "Form field internal spacing" },
+    { "id": "component.table.row.gap", "layer": "component", "type": "space", "description": "Table row gap spacing" }
+  ]
+}

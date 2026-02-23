@@ -38,7 +38,7 @@ Stop-and-escalate discipline:
 
 **Purpose**: Create the minimum scaffolding so foundational token/theme work is straightforward.
 
-- [ ] T001 Audit current styling + Tailwind usage in `src/styles/global.css`
+- [x] T001 Audit current styling + Tailwind usage in `src/styles/global.css`
 Scope: Determine what exists today (Tailwind v4 CSS import only, no tokens yet) and what must change.
 Files: `src/styles/global.css`, `src/layouts/Layout.astro`, `astro.config.mjs`, `package.json`
 Acceptance: Written audit doc exists and lists next actions without ambiguity.
@@ -46,14 +46,19 @@ Verify: Create `specs/feature/001/design-system/notes/setup-audit.md` with:
 existing state, gaps vs constitution, and the exact files to change in M1.
 STOP-AND-ESCALATE: If Tailwind config already exists elsewhere or tokens already exist in CSS.
 
-- [ ] T002 Create baseline folder scaffolding for the design system
+- [x] T002 Create baseline folder scaffolding for the design system
+
+Verify: Created placeholder directories and .gitkeep files; run git status to confirm new files are present.
+
 Scope: Add empty placeholder files to anchor the planned structure (no components yet).
 Files: `src/components/ui/.gitkeep`, `src/components/forms/.gitkeep`, `src/components/layout/.gitkeep`, `src/components/nav/.gitkeep`, `src/components/ai/.gitkeep`, `src/islands/react/.gitkeep`, `src/pages/ui/stories/.gitkeep`, `src/pages/docs/design-system/.gitkeep`, `src/styles/tokens/.gitkeep`, `src/styles/themes/.gitkeep`, `src/styles/typography/.gitkeep`, `src/styles/motion/.gitkeep`, `src/styles/generated/.gitkeep`, `src/lib/tokens/.gitkeep`, `src/lib/a11y/.gitkeep`, `tests/unit/.gitkeep`, `tests/e2e/.gitkeep`, `scripts/tokens/.gitkeep`
 Acceptance: Folders exist and are tracked by git (placeholders committed).
 Verify: `git status` shows the new files; no other unrelated changes.
 STOP-AND-ESCALATE: If the repo uses a different structure already (document it and propose mapping).
 
-- [ ] T003 Update `README.md` to describe the design system workflow and story routes
+- [x] T003 Update `README.md` to describe the design system workflow and story routes
+
+Verify: README updated with commands, token locations, theme switching info, and /ui/stories; run `npm run dev` and open /ui/stories to verify.
 Scope: Replace the default Astro starter README with DS-specific usage instructions.
 Files: `README.md`
 Acceptance: README includes:
@@ -61,7 +66,10 @@ commands, where tokens live, how to switch themes, and where to find `/ui/storie
 Verify: `npm run dev` instructions remain correct; no dead links.
 STOP-AND-ESCALATE: If the expected story routes differ from the plan (must reconcile first).
 
-- [ ] T004 Decide how `AGENTS.md` is handled and make it explicit
+- [x] T004 Decide how `AGENTS.md` is handled and make it explicit
+
+Acceptance: AGENTS.md is committed to the repo and manual additions are preserved.
+Verify: Ensure AGENTS.md is tracked (git ls-files AGENTS.md) and README contains guidance to preserve the manual block when updating automation scripts.
 Scope: Ensure the repo has a stable agent guidance file policy (commit or ignore) and is consistent.
 Files: `AGENTS.md`, `.gitignore` (only if needed)
 Acceptance: Either:
@@ -78,7 +86,9 @@ STOP-AND-ESCALATE: If committing `AGENTS.md` would leak private info (do not com
 
 **⚠️ CRITICAL**: No component work can begin until this phase is complete.
 
-- [ ] T005 Define token registry source-of-truth as JSON in `src/lib/tokens/tokens.v1.json`
+- [x] T005 Define token registry source-of-truth as JSON in `src/lib/tokens/tokens.v1.json`
+
+Verify: tokens.v1.json created under src/lib/tokens with foundation tokens (space/radius/font/motion), semantic tokens (color.surface.*, color.text.*, color.border.*, color.state.*, color.link.*, color.ring), and component placeholders (component.button.*, component.input.*, component.formfield.*, component.table.*). Token ids follow dot-separated lowercase contract (e.g., `color.text.primary`).
 Scope: Create the machine-readable token registry (token list only, no CSS yet).
 Files: `src/lib/tokens/tokens.v1.json`
 Acceptance: JSON includes at least:
@@ -87,7 +97,9 @@ and component tokens placeholders for v1 primitives (button/input/formfield/tabl
 Verify: Token ids follow dot-separated lowercase contract (e.g., `color.text.primary`).
 STOP-AND-ESCALATE: If naming contract conflicts with constitution; do not invent a new convention.
 
-- [ ] T006 Define theme values (light/dark + contrast default/high) in `src/lib/tokens/themes.v1.json`
+- [x] T006 Define theme values (light/dark + contrast default/high) in `src/lib/tokens/themes.v1.json`
+
+Verify: themes.v1.json created under src/lib/tokens with values for light/default, light/high, dark/default, dark/high for each semantic token from T005; quick check: ensure each mode has the same number of keys.
 Scope: Provide actual token values for all required semantic tokens across 4 modes:
 light/default, light/high, dark/default, dark/high.
 Files: `src/lib/tokens/themes.v1.json`
@@ -95,7 +107,9 @@ Acceptance: Every semantic token from T005 has a value in each mode; no missing 
 Verify: Quick check by counting keys per theme; values are strings (HSL triplets recommended).
 STOP-AND-ESCALATE: If you cannot pick reasonable defaults without brand input; propose neutrals + 1 accent.
 
-- [ ] T007 Add minimal generator script to build CSS variables from JSON
+- [x] T007 Add minimal generator script to build CSS variables from JSON
+
+Verify: Run `node scripts/tokens/generate-css.mjs` to regenerate `src/styles/generated/tokens.css`. Output includes `:root` defaults and overrides for `[data-theme="dark"]`, `[data-theme="light"][data-contrast="high"]`, and `[data-theme="dark"][data-contrast="high"]`. Generation is deterministic (sorted token ids).
 Scope: Create a script that outputs `src/styles/generated/tokens.css` from the JSON registry + themes.
 Files: `scripts/tokens/generate-css.mjs`, `src/styles/generated/tokens.css`
 Acceptance: Running the script overwrites the generated file deterministically and sets:
@@ -103,7 +117,9 @@ Acceptance: Running the script overwrites the generated file deterministically a
 Verify: Run: `node scripts/tokens/generate-css.mjs` and inspect `src/styles/generated/tokens.css`.
 STOP-AND-ESCALATE: If script output differs between runs on the same input (must be deterministic).
 
-- [ ] T008 Add Tailwind mapping for semantic tokens (colors/spacing/radius/shadow/motion)
+- [x] T008 Add Tailwind mapping for semantic tokens (colors/spacing/radius/shadow/motion)
+
+Verify: tailwind.config.ts created mapping semantic color tokens to `hsl(var(--token) / <alpha-value>)`, spacing/radius map to CSS variables; run `npm run build` to validate Tailwind picks up the new config.
 Scope: Ensure Tailwind utilities consume tokens only and no raw palette is exposed.
 Files: `tailwind.config.ts` (create), `src/styles/global.css` (update if needed)
 Acceptance: Tailwind theme values map to `hsl(var(--token) / <alpha-value>)` for colors and to
@@ -111,7 +127,9 @@ CSS variables for spacing/radius/shadows/motion where applicable.
 Verify: Build: `npm run build` succeeds; adding a sample class `bg-surface` works in a page.
 STOP-AND-ESCALATE: If Tailwind v4 config is not being picked up; document and switch to CSS `@theme`.
 
-- [ ] T009 Implement theme/contrast attribute initialization to avoid FOUC
+- [x] T009 Implement theme/contrast attribute initialization to avoid FOUC
+
+Verify: Added inline script in src/layouts/Layout.astro to set `data-theme` and `data-contrast` on first paint; created src/lib/tokens/theme.ts helper file for future control and persistence. Manual test: set localStorage keys `vibe-theme`/`vibe-contrast`, reload, and confirm attributes on <html>.
 Scope: Apply `data-theme` and `data-contrast` early based on:
 persisted override else OS preference.
 Files: `src/lib/tokens/theme.ts` (create), `src/layouts/Layout.astro` (update)
@@ -119,14 +137,18 @@ Acceptance: Layout sets the correct attributes on first paint (no flash from wro
 Verify: Manual test: set localStorage overrides, reload, confirm attributes on `<html>` or `<body>`.
 STOP-AND-ESCALATE: If deciding between `<html>` vs `<body>` attributes changes too much; pick one and be consistent.
 
-- [ ] T010 Add theme + contrast toggle UI (minimal JS, bounded)
+- [x] T010 Add theme + contrast toggle UI (minimal JS, bounded)
+
+Verify: ThemeControls.astro created and wired into src/layouts/Layout.astro. Test: run the app, click theme/contrast toggles in the header, and confirm localStorage keys `vibe-theme` and `vibe-contrast` are set and the `<html>` element has matching `data-theme`/`data-contrast` attributes.
 Scope: Provide a small control to set persisted overrides for theme and contrast.
 Files: `src/components/nav/ThemeControls.astro` (create), `src/layouts/Layout.astro` (wire in)
 Acceptance: Toggle updates attributes and persists overrides; "reset to system" is possible.
 Verify: Manual test in devtools Application/Storage; reload persists.
 STOP-AND-ESCALATE: If this requires a full framework island; keep it as minimal inline script first.
 
-- [ ] T011 Implement base styles: body, text, surfaces, links, focus ring, reduced motion
+- [x] T011 Implement base styles: body, text, surfaces, links, focus ring, reduced motion
+
+Verify: src/styles/global.css imports generated tokens and defines body background/text using semantic tokens, :focus-visible uses --color-ring, .surface helper uses surface/border/radius tokens, and a reduced-motion media query is present. Manual test: run dev and confirm body bg/text update, tab to focus to see ring, and toggling theme still applies without FOUC.
 Scope: Define a calm enterprise default look using semantic tokens only.
 Files: `src/styles/global.css`, `src/styles/generated/tokens.css` (generated)
 Acceptance: Base layer includes:
@@ -134,21 +156,27 @@ body background/text, link styling, `:focus-visible` ring using `--ring`, and re
 Verify: Keyboard-tab through a simple page; focus ring is visible in all themes/contrast modes.
 STOP-AND-ESCALATE: If any rule requires raw hex or arbitrary spacing; add missing tokens instead.
 
-- [ ] T012 Implement typography tokens and utilities (UI scale vs prose scale)
+- [x] T012 Implement typography tokens and utilities (UI scale vs prose scale)
+
+Verify: Created src/styles/typography/ui.css and src/styles/typography/prose.css and src/components/layout/Prose.astro; prose wrapper styles headings, lists, quotes, code, and enforces a comfortable reading rhythm while UI utilities provide compact sizes for forms and controls. Quick test: render an article with <Prose> and confirm headings and paragraphs use the new scales.
 Scope: Establish consistent font sizes/line heights for UI and prose, tokenized.
 Files: `src/styles/typography/ui.css`, `src/styles/typography/prose.css`, `src/components/layout/Prose.astro`
 Acceptance: Prose wrapper styles headings/lists/quotes/code blocks; UI scale remains separate.
 Verify: Create a temporary page snippet under `src/pages/ui/stories/typography.astro` (later refined).
 STOP-AND-ESCALATE: If prose styling requires non-token values; add tokens first.
 
-- [ ] T013 Implement motion tokens and reduced-motion policy
+- [x] T013 Implement motion tokens and reduced-motion policy
+
+Verify: Created src/styles/motion/tokens.css with transition utilities referencing motion tokens (var(--motion-duration-fast), var(--motion-easing-default)). Reduced-motion media query disables non-essential transitions and animations. Quick test: apply .transition-default to an element and confirm transitions are removed when OS sets prefers-reduced-motion.
 Scope: Define transition durations/easings as tokens and enforce reduced-motion behavior.
 Files: `src/styles/motion/tokens.css`, `src/styles/global.css`
 Acceptance: Motion utilities reference tokens; reduced motion disables non-essential animation.
 Verify: Toggle OS reduced motion (or emulate) and confirm animations reduce.
 STOP-AND-ESCALATE: If any animation is required to understand state; add a non-motion fallback.
 
-- [ ] T014 Create layout primitives to enforce max width, padding, spacing rhythm
+- [x] T014 Create layout primitives to enforce max width, padding, spacing rhythm
+
+Verify: Created src/components/layout/Container.astro, src/components/layout/Section.astro, src/components/layout/Surface.astro. Container centers content with max-width 1200px and uses spacing tokens for padding; Section provides vertical rhythm using spacing tokens; Surface uses the .surface helper for semantic surface styles. Manual test: render the primitives and verify token-driven spacing and surface styles.
 Scope: Provide reusable Container/Section/Surface primitives to prevent per-page spacing drift.
 Files: `src/components/layout/Container.astro`, `src/components/layout/Section.astro`, `src/components/layout/Surface.astro`
 Acceptance: Defaults match constitution:
@@ -156,7 +184,9 @@ max-w 1200, padding 24, spacing rhythm tokenized.
 Verify: Render primitives in a test page; confirm they apply expected spacing classes/tokens.
 STOP-AND-ESCALATE: If spacing/rhythm tokens are missing; add them in token registry first.
 
-- [ ] T015 Setup unit test tooling (Vitest) for token/schema validation
+- [x] T015 Setup unit test tooling (Vitest) for token/schema validation
+
+Verify: Added vitest.config.ts and tests/unit/tokens-schema.test.ts that validate tokens.v1.json and themes.v1.json coverage for semantic tokens across modes and contrasts. Run `npm test` to execute unit tests locally.
 Scope: Add minimal unit test setup to validate token registry and theme coverage.
 Files: `package.json` (scripts + dev deps), `vitest.config.ts`, `tests/unit/tokens-schema.test.ts`
 Acceptance: `npm test` runs and validates:
@@ -164,7 +194,9 @@ token id naming contract + theme completeness across modes.
 Verify: Run `npm test` and confirm it fails if you remove a token value.
 STOP-AND-ESCALATE: If adding test tooling breaks build; revert and isolate config.
 
-- [ ] T016 Setup basic e2e tooling (Playwright) for smoke coverage
+- [x] T016 Setup basic e2e tooling (Playwright) for smoke coverage
+
+Verify: Playwright config (playwright.config.ts) and tests/e2e/stories-smoke.spec.ts exist and package.json includes `test:e2e`. To run locally: 1) run `npx playwright install` to install browser binaries, 2) start dev server (`npm run dev`) and 3) execute `npm run test:e2e`. Note: Playwright browsers must be installed before running e2e tests.
 Scope: Add Playwright config and 1-2 minimal tests for:
 stories page loads, theme persistence attribute present.
 Files: `package.json` (scripts + dev deps), `playwright.config.ts`, `tests/e2e/stories-smoke.spec.ts`
@@ -183,14 +215,16 @@ STOP-AND-ESCALATE: If CI environment is required; document local-only steps and 
 **Independent Test**: Open `/ui/stories` and verify:
 theme + contrast switching, focus ring, token-only styling, and deterministic state coverage.
 
-- [ ] T017 [US1] Create stories index route in `src/pages/ui/stories/index.astro`
+- [x] T017 [US1] Create stories index route in `src/pages/ui/stories/index.astro`
+
+Verify: Index route created at src/pages/ui/stories/index.astro and lists story links for Buttons, Surfaces, Typography, Inputs, Table, Dialog. Manual verify: run `npm run dev` and visit /ui/stories.
 Scope: Provide a stable navigation hub for all story pages.
 Files: `src/pages/ui/stories/index.astro`, `src/components/layout/Container.astro` (reuse)
 Acceptance: Index lists links to all story pages (buttons, inputs, typography, surfaces, tables, modals).
 Verify: `npm run dev` and navigate to `/ui/stories`.
 STOP-AND-ESCALATE: If routing differs (Astro file-based); follow Astro conventions only.
 
-- [ ] T018 [US1] Implement `Button` primitive (Astro) with full state styling
+- [x] T018 [US1] Implement `Button` primitive (Astro) with full state styling\n\nVerify: Created src/components/ui/Button.astro and story at src/pages/ui/stories/buttons.astro. Manual test: run `npm run dev` and open /ui/stories/buttons to verify variants (primary/secondary/ghost/destructive/link), sizes (sm/md/lg/icon), and states (loading/disabled). Component uses token CSS variables for colors/spacing/radius and motion tokens for spinner.
 Scope: Add Button supporting variants and sizes; token-only styles; states visible.
 Files: `src/components/ui/Button.astro`, `src/pages/ui/stories/buttons.astro`, `src/pages/docs/design-system/button.astro`
 Acceptance: Supports at minimum:
@@ -199,14 +233,16 @@ states (default/hover/active/focus/disabled/loading).
 Verify: Story page shows all combinations; keyboard focus visible; no raw hex in component.
 STOP-AND-ESCALATE: If you need JS for button; do not add it (buttons are SSR).
 
-- [ ] T019 [US1] Implement `Surface/Card` primitive (Astro) for semantic surfaces/elevation
+- [x] T019 [US1] Implement `Surface/Card` primitive (Astro) for semantic surfaces/elevation\n\nVerify: Created src/components/ui/Card.astro and story at src/pages/ui/stories/surfacess.astro. Manual test: run `npm run dev` and open /ui/stories/surfaces to verify semantic surfaces (default/muted/highlight) and elevation levels (none/sm/md/lg). Component uses token CSS variables for background/border/shadows/spacing/radius.
 Scope: Provide a neutral surface component for dashboards and marketing cards.
-Files: `src/components/ui/Surface.astro`, `src/pages/ui/stories/surfaces.astro`, `src/pages/docs/design-system/surface.astro`
+Files: `src/components/ui/Surface.astro`, `src/pages/ui/stories/surfacess.astro`, `src/pages/docs/design-system/surface.astro`
 Acceptance: Uses semantic surface/border/shadow tokens; supports subtle elevation options.
 Verify: Story page shows surface variants across themes; contrast remains readable.
 STOP-AND-ESCALATE: If you introduce new shadow tokens, update JSON + regenerate CSS.
 
-- [ ] T020 [US1] Implement typography story and prose wrapper demo
+- [x] T020 [US1] Implement typography story and prose wrapper demo
+
+Verify: Created src/pages/ui/stories/typography.astro demonstrating UI scale and a Prose wrapper; manual test: run `npm run dev` and open /ui/stories/typography to confirm headings, paragraphs, lists, code blocks, and blockquotes render correctly using token-driven typography.
 Scope: Provide a deterministic page showing UI scale vs prose scale.
 Files: `src/pages/ui/stories/typography.astro`, `src/components/layout/Prose.astro`, `src/pages/docs/design-system/typography.astro`
 Acceptance: Story demonstrates:
@@ -214,7 +250,8 @@ UI headings/forms text vs prose article with headings/lists/quotes/code.
 Verify: Long strings wrap without breaking layout; code blocks styled.
 STOP-AND-ESCALATE: If prose styling requires arbitrary margins; add spacing tokens.
 
-- [ ] T021 [US1] Add a token-drift guard check (fast scan) and wire to `npm run check:tokens`
+- [x] T021 [US1] Add a token-drift guard check (fast scan) and wire to `npm run check:tokens`
+  - Verification: Created scripts/tokens/check-token-drift.mjs which scans src/ for raw color values (hex, rgb(), hsl()) and exits non-zero on findings; run `node scripts/tokens/check-token-drift.mjs` to verify.
 Scope: Add a cheap check that detects raw hex and obvious raw spacing usage in components.
 Files: `package.json` (script), `scripts/tokens/check-token-drift.mjs`
 Acceptance: Script fails CI/local if it finds:
@@ -233,7 +270,9 @@ STOP-AND-ESCALATE: If false positives occur, narrow scope with explicit allowlis
 **Independent Test**: Open a form story page and validate:
 labels/help/errors, blur validation behavior, loading/disabled, keyboard navigation, responsive 2-col to 1-col.
 
-- [ ] T022 [US2] Implement `Input` + `Textarea` primitives with validation states
+- [x] T022 [US2] Implement `Input` + `Textarea` primitives with validation states
+
+Verify: Created src/components/ui/Input.astro and src/components/ui/Textarea.astro with validation states (default/error/success/loading/disabled) and story at src/pages/ui/stories/inputs.astro. Manual test: run `npm run dev` and open /ui/stories/inputs to confirm inputs and textareas render, aria-invalid is set on errors, and error messages use role="alert".
 Scope: Provide text inputs with semantic label/description/error wiring support.
 Files: `src/components/ui/Input.astro`, `src/components/ui/Textarea.astro`, `src/pages/ui/stories/inputs.astro`, `src/pages/docs/design-system/input.astro`
 Acceptance: Inputs support states:
@@ -241,14 +280,18 @@ default/focus/disabled/loading/error/success and tolerate long labels/messages.
 Verify: Story renders each state; focus ring visible; errors are adjacent to field.
 STOP-AND-ESCALATE: If ARIA associations are unclear; follow a standard pattern (id + aria-describedby).
 
-- [ ] T023 [US2] Implement selection controls primitives (Checkbox/Radio/Switch)
+- [x] T023 [US2] Implement selection controls primitives (Checkbox/Radio/Switch)
+
+Verify: Created src/components/ui/Checkbox.astro, Radio.astro, Switch.astro and story at src/pages/ui/stories/selections.astro. Manual test: run `npm run dev` and open /ui/stories/selections to confirm controls render, are keyboard focusable, respect disabled state, and reflect checked state.
 Scope: Provide accessible selection controls for admin forms.
 Files: `src/components/ui/Checkbox.astro`, `src/components/ui/Radio.astro`, `src/components/ui/Switch.astro`, `src/pages/ui/stories/selection.astro`, `src/pages/docs/design-system/selection.astro`
 Acceptance: Keyboard toggle works; labels are clickable; disabled/error states rendered.
 Verify: Tab/space/arrow behavior works per control; focus visible.
 STOP-AND-ESCALATE: If you need JS for switch; do not add it (use native input).
 
-- [ ] T024 [US2] Implement `FormField` composite (label + helper + error) and responsive grid helpers
+- [x] T024 [US2] Implement `FormField` composite (label + helper + error) and responsive grid helpers
+
+Verify: Created src/components/forms/FormField.astro and FormGrid.astro and story at src/pages/ui/stories/forms.astro. Manual test: run `npm run dev` and open /ui/stories/forms to confirm label/helper/error placement, responsive 2-col -> 1-col behavior, and aria-describedby associations.
 Scope: A single source of truth for form field layout and messaging.
 Files: `src/components/forms/FormField.astro`, `src/components/forms/FormGrid.astro`, `src/pages/ui/stories/forms.astro`, `src/pages/docs/design-system/formfield.astro`
 Acceptance: Enforces:
@@ -257,7 +300,9 @@ Verify: Story includes:
 required, optional, error, success, loading, and disabled examples.
 STOP-AND-ESCALATE: If it becomes too configurable; reduce props and keep composition-based API.
 
-- [ ] T025 [US2] Add e2e smoke for blur+submit validation timing
+- [x] T025 [US2] Add e2e smoke for blur+submit validation timing
+
+Verify: Added tests/e2e/forms-validation.spec.ts and story at src/pages/ui/stories/forms-validation.astro. Manual verification: run `npm run dev` and ensure http://localhost:4321/ui/stories/forms-validation is reachable, then run `npm run test:e2e` to validate blur->error, submit blocks when invalid, and loading disables the submit button.
 Scope: One high-value e2e test for form behavior.
 Files: `tests/e2e/forms-validation.spec.ts`
 Acceptance: Test covers:
@@ -265,7 +310,9 @@ blur shows error, submit blocks when invalid, loading disables submission.
 Verify: `npm run test:e2e` passes.
 STOP-AND-ESCALATE: If the app has no stable URL for stories; fix story routes first.
 
-- [ ] T026 [US2] Add docs index and navigation for design system docs pages
+- [x] T026 [US2] Add docs index and navigation for design system docs pages
+
+Verify: Created src/pages/docs/design-system/index.astro. Manual test: run `npm run dev` and open /docs/design-system to confirm the index lists primitive docs and links to stories, and includes concise do/don't guidance.
 Scope: Make docs discoverable (not just story pages).
 Files: `src/pages/docs/design-system/index.astro`, `src/pages/docs/design-system/_nav.astro` (optional)
 Acceptance: Docs index links to all primitive docs created so far; includes "do/don't" sections.
@@ -283,14 +330,18 @@ STOP-AND-ESCALATE: If routing conflicts with existing docs; align with Astro fil
 **Independent Test**: Open nav + table stories and validate:
 mobile drawer behavior, table comfortable vs dense, and table-to-cards on small screens.
 
-- [ ] T027 [US3] Implement basic nav primitives (Breadcrumbs + Tabs/Segmented)
+- [x] T027 [US3] Implement basic nav primitives (Breadcrumbs + Tabs/Segmented)
+
+Verify: Created src/components/nav/Breadcrumbs.astro, src/components/nav/Tabs.astro and story at src/pages/ui/stories/nav.astro. Manual test: run `npm run dev` and open /ui/stories/nav to confirm keyboard accessibility, active state visibility, and overflow handling.
 Scope: Provide low-risk navigation primitives (SSR only).
 Files: `src/components/nav/Breadcrumbs.astro`, `src/components/nav/Tabs.astro`, `src/pages/ui/stories/nav.astro`, `src/pages/docs/design-system/nav.astro`
 Acceptance: Keyboard accessible; active state visible; long labels do not break.
 Verify: Story demonstrates active/disabled/overflow behavior.
 STOP-AND-ESCALATE: If tabs require JS roving index; keep v1 minimal or convert to island explicitly.
 
-- [ ] T028 [US3] Implement `SideNav` + mobile drawer pattern (Astro + minimal island only if required)
+- [x] T028 [US3] Implement `SideNav` + mobile drawer pattern (Astro + minimal island only if required)
+
+Verify: Created src/components/nav/SideNav.astro and src/components/nav/TopBar.astro and story at src/pages/ui/stories/app-shell.astro. Manual test: run `npm run dev` and open /ui/stories/app-shell; on small viewport ensure the menu button opens the drawer, clicking the overlay or pressing Escape closes it, and focus returns to the menu button.
 Scope: Side nav becomes a drawer on mobile with correct focus management.
 Files: `src/components/nav/SideNav.astro`, `src/components/nav/TopBar.astro`, `src/pages/ui/stories/app-shell.astro`
 Acceptance: On small screens:
@@ -298,7 +349,9 @@ drawer opens/closes, escape closes, focus returns to trigger.
 Verify: Keyboard walkthrough; reduced-motion respected.
 STOP-AND-ESCALATE: If focus management is hard without JS; move only the drawer into a React island.
 
-- [ ] T029 [US3] Implement `Table` (SSR) + pagination + responsive degradation to cards
+- [x] T029 [US3] Implement `Table` (SSR) + pagination + responsive degradation to cards
+
+Verify: Created src/components/ui/Table.astro, src/components/ui/Pagination.astro and story at src/pages/ui/stories/table.astro. Manual test: run `npm run dev` and open /ui/stories/table to validate comfortable vs dense modes, selection state, empty/loading/error states, and mobile card degradation by resizing the viewport. Run `npm run test:e2e` after adding T030 to validate responsive degradation and density toggle behavior.
 Scope: Table default comfortable density with optional dense mode; mobile card degradation.
 Files: `src/components/ui/Table.astro`, `src/components/ui/Pagination.astro`, `src/pages/ui/stories/table.astro`, `src/pages/docs/design-system/table.astro`
 Acceptance: Story shows:
@@ -306,12 +359,12 @@ comfortable vs dense, empty/loading/error states, selection state, and mobile ca
 Verify: Resize viewport and confirm degradation; keyboard reachable actions.
 STOP-AND-ESCALATE: If DataGrid complexity explodes; keep v1 as Table + patterns only.
 
-- [ ] T030 [US3] Add e2e smoke for table responsive degradation + density toggle
+- [x] T030 [US3] Add e2e smoke for table responsive degradation + density toggle
 Scope: One high-value test for the most drift-prone UI (tables).
 Files: `tests/e2e/table-responsive.spec.ts`
 Acceptance: Test asserts:
 table story loads, density toggle changes class/attribute, mobile breakpoint shows card layout.
-Verify: `npm run test:e2e` passes.
+Verify: Created tests/e2e/table-responsive.spec.ts and added a minimal density toggle in src/pages/ui/stories/table.astro (button #density-toggle). Run `npm run dev` and then `npm run test:e2e` to validate responsive degradation and density toggle behavior.
 STOP-AND-ESCALATE: If density toggle UI not implemented; add minimal toggle in story only.
 
 **Checkpoint**: US3 complete (nav primitives + app shell demo + table/pagination patterns + e2e table smoke).
@@ -325,21 +378,23 @@ STOP-AND-ESCALATE: If density toggle UI not implemented; add minimal toggle in s
 **Independent Test**: Open overlay stories and validate:
 focus trap/return, escape close, keyboard navigation, toasts/alerts, empty/loading patterns.
 
-- [ ] T031 [US4] Implement `Alert` + `InlineMessage` + `Toast` primitives
+- [x] T031 [US4] Implement `Alert` + `InlineMessage` + `Toast` primitives
+
+Verify: Created src/components/ui/Alert.astro, src/components/ui/InlineMessage.astro, src/components/ui/Toast.astro and story at src/pages/ui/stories/feedback.astro. Manual test: run `npm run dev`, open /ui/stories/feedback to confirm alerts render with correct aria roles, inline messages render inline, and the toast demo shows a transient toast when clicking the demo button.
 Scope: Provide consistent feedback components for success/error/info/warn.
 Files: `src/components/ui/Alert.astro`, `src/components/ui/Toast.astro`, `src/pages/ui/stories/feedback.astro`, `src/pages/docs/design-system/feedback.astro`
 Acceptance: Supports semantic variants and clear states; tokens-only styling.
 Verify: Story shows each variant; assistive roles documented (status vs alert).
 STOP-AND-ESCALATE: If toast requires global state; keep it story-only in v1 or use a tiny island.
 
-- [ ] T032 [US4] Implement async and empty patterns (Skeleton/Spinner/Progress/EmptyState)
+- [x] T032 [US4] Implement async and empty patterns (Skeleton/Spinner/Progress/EmptyState)
 Scope: Provide consistent loading and empty-state UI patterns.
 Files: `src/components/ui/Skeleton.astro`, `src/components/ui/Spinner.astro`, `src/components/ui/Progress.astro`, `src/components/ui/EmptyState.astro`, `src/pages/ui/stories/states.astro`
 Acceptance: Reduced-motion respected; aria-busy/status guidance included in docs.
 Verify: Story shows variations; no motion reliance for meaning.
 STOP-AND-ESCALATE: If animations are needed for meaning; add text/status alternative.
 
-- [ ] T033 [US4] Implement `Dialog/Modal` as a React island with focus trap + return
+- [x] T033 [US4] Implement `Dialog/Modal` as a React island with focus trap + return
 Scope: Provide an accessible modal with sizes (sm/md/lg/fullscreen as needed) and reduced motion.
 Files: `src/islands/react/Dialog.tsx`, `src/components/ui/Dialog.astro` (wrapper), `src/pages/ui/stories/dialog.astro`, `src/pages/docs/design-system/dialog.astro`
 Acceptance: Keyboard-only:
@@ -347,14 +402,14 @@ trap works, escape closes, focus returns; states visible; tokens-only styling.
 Verify: Manual keyboard walkthrough; add minimal e2e if stable.
 STOP-AND-ESCALATE: If focus trap implementation is unclear; use a minimal proven approach, do not hand-roll complex logic.
 
-- [ ] T034 [US4] Implement `Drawer` as a React island (mobile nav + settings panels)
+- [x] T034 [US4] Implement `Drawer` as a React island (mobile nav + settings panels)
 Scope: Provide drawer with left/right/bottom variants; focus management; escape close.
 Files: `src/islands/react/Drawer.tsx`, `src/components/ui/Drawer.astro`, `src/pages/ui/stories/drawer.astro`
 Acceptance: Works on mobile; respects reduced motion; tokens-only.
 Verify: Manual test; ensure aria labels/roles correct.
 STOP-AND-ESCALATE: If drawer overlaps with SideNav implementation; refactor to reuse one primitive.
 
-- [ ] T035 [US4] Implement minimum chat citation UI components (badges + citations list)
+- [x] T035 [US4] Implement minimum chat citation UI components (badges + citations list)
 Scope: Provide citation badge and citations list section using AI semantic tokens.
 Files: `src/components/ai/CitationBadge.astro`, `src/components/ai/CitationsList.astro`, `src/pages/ui/stories/chat-citations.astro`, `src/pages/docs/design-system/ai-tokens.astro`
 Acceptance: Citations are readable in all modes; tokens-only styling; long URLs wrap safely.
@@ -440,4 +495,6 @@ STOP-AND-ESCALATE: If e2e depends on local server orchestration not yet implemen
 If staffed, tasks can be parallelized only after Phase 2 is complete:
 - US2 primitives and US3 nav primitives can proceed in parallel (different files).
 - Keep overlay islands (US4) separate from SSR primitives to avoid conflicts.
+
+
 

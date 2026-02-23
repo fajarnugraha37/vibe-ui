@@ -1,0 +1,13 @@
+---
+import DrawerIsland from "../../islands/react/Drawer.tsx";
+
+interface Props {
+  triggerText?: string;
+  direction?: 'left' | 'right' | 'bottom';
+  title?: string;
+}
+
+const { triggerText = 'Open drawer', direction = 'left', title = 'Panel' } = Astro.props as Props;
+---
+
+<DrawerIsland client:load triggerText={triggerText} direction={direction} title={title} />

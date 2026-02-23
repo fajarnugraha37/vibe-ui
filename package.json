@@ -6,7 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check:tokens": "node scripts/tokens/check-token-drift.mjs",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
@@ -22,5 +26,12 @@
     "react-dom": "^19.2.4",
     "sass": "^1.97.3",
     "tailwindcss": "^4.2.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.2.0",
+    "@playwright/test": "^1.40.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.3.0",
+    "vitest": "^1.2.1"
   }
 }

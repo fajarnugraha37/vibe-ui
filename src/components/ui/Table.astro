@@ -1,0 +1,130 @@
+---
+import "../../styles/typography/ui.css";
+
+interface Col { key: string; label: string; }
+interface Props {
+  columns?: Col[];
+  rows?: any[];
+  density?: 'comfortable' | 'dense';
+  loading?: boolean;
+  error?: string;
+  emptyMessage?: string;
+  selectable?: boolean;
+  class?: string;
+}
+
+const {
+  columns = [],
+  rows = [],
+  density = 'comfortable',
+  loading = false,
+  error = '',
+  emptyMessage = 'No data',
+  selectable = false,
+  class: className = ''
+} = Astro.props as Props;
+---
+
+<div class={`table-wrapper ${className}`} data-density={density} data-selectable={selectable ? 'true' : 'false'}>
+  {error ? <div class="table-error" role="alert">{error}</div> : null}
+
+  {loading ? (
+    <div class="table-loading" role="status">Loading…</div>
+  ) : null}
+
+  {!loading && rows.length === 0 && !error ? (
+    <div class="table-empty">{emptyMessage}</div>
+  ) : null}
+
+  {!loading && rows.length > 0 && !error ? (
+    <div class="table-responsive">
+      <table class="vibe-table" role="table">
+        <thead>
+          <tr>
+            {selectable ? <th><input type="checkbox" data-select-all aria-label="Select all rows" /></th> : null}
+            {columns.map((c) => <th key={c.key}>{c.label}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={i}>
+              {selectable ? <td><input type="checkbox" class="row-select" aria-label={`Select row ${i+1}`} /></td> : null}
+              {columns.map((c) => <td key={c.key}>{String(r[c.key] ?? '')}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div class="table-cards" aria-hidden="true">
+        {rows.map((r, i) => (
+          <article class="table-card" key={i}>
+            <div class="card-header">
+              {selectable ? <input type="checkbox" class="row-select" aria-label={`Select row ${i+1}`} /> : null}
+              <strong class="card-title">{String(r[columns[0]?.key] ?? '')}</strong>
+            </div>
+            <dl class="card-list">
+              {columns.slice(1).map((c) => (
+                <div class="card-row" key={c.key}>
+                  <dt class="card-label">{c.label}</dt>
+                  <dd class="card-value">{String(r[c.key] ?? '')}</dd>
+                </div>
+              ))}
+            </dl>
+          </article>
+        ))}
+      </div>
+    </div>
+  ) : null}
+
+</div>
+
+<script type="module">
+(function(){
+  // delegated handler for select-all and card link close behaviour
+  document.addEventListener('change', function(e){
+    const target = e.target;
+    if (!target) return;
+    if (target.matches && target.matches('[data-select-all]')){
+      const root = target.closest('.table-wrapper');
+      if (!root) return;
+      const checked = !!target.checked;
+      const rows = root.querySelectorAll('.row-select');
+      rows.forEach(function(r){ r.checked = checked; });
+    }
+  });
+})();
+</script>
+
+<style>
+.table-wrapper { width: 100%; font-family: inherit; }
+.table-loading, .table-empty, .table-error { padding: 1rem; border-radius: 8px; background: var(--color-surface-muted, #f8fafc); color: var(--color-text-muted); }
+.table-error { background: rgba(255,235,238,0.9); color: var(--color-state-error); }
+
+.vibe-table { width: 100%; border-collapse: collapse; min-width: 480px; }
+.vibe-table th, .vibe-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--color-border-default); }
+.vibe-table th { font-weight: 600; color: var(--color-text-muted); font-size: 0.95rem; }
+.vibe-table td { color: var(--color-text-primary); }
+
+.table-wrapper[data-density="dense"] .vibe-table th,
+.table-wrapper[data-density="dense"] .vibe-table td { padding: 6px 8px; }
+
+/* Responsive cards (mobile) */
+.table-cards { display: none; }
+.table-card { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,252,0.98)); border-radius: 10px; padding: 12px; margin-bottom: 12px; box-shadow: 0 8px 24px rgba(12,20,35,0.06); }
+.card-header { display:flex; align-items:center; gap:0.75rem; margin-bottom: 8px; }
+.card-title { font-weight: 700; }
+.card-list { margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+.card-row { display:flex; gap:8px; }
+.card-label { font-weight:600; color:var(--color-text-muted); width:120px; }
+.card-value { color:var(--color-text-primary); }
+
+/* Show table on wide screens; cards on narrow */
+@media (max-width: 767px) {
+  .vibe-table { display: none; }
+  .table-cards { display: block; }
+}
+@media (min-width: 768px) {
+  .vibe-table { display: table; }
+  .table-cards { display: none; }
+}
+</style>

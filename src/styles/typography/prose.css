@@ -1,0 +1,26 @@
+/* Prose typography — comfortable reading rhythm for longform content */
+:root {
+  --font-size-prose-base: 18px;
+  --font-size-prose-lg: 20px;
+  --font-size-prose-xl: 24px;
+  --font-size-prose-xxl: 32px;
+  --font-lineheight-prose: 1.6;
+}
+
+.prose {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-prose-base);
+  line-height: var(--font-lineheight-prose);
+  color: var(--color-text-primary);
+  max-width: 65ch;
+}
+
+.prose h1 { font-size: var(--font-size-prose-xxl); line-height: 1.1; margin: 1.2em 0 0.3em 0; font-weight: var(--font-weight-bold); }
+.prose h2 { font-size: var(--font-size-prose-xl); margin: 1.1em 0 0.3em 0; font-weight: var(--font-weight-medium); }
+.prose h3 { font-size: var(--font-size-prose-lg); margin: 1em 0 0.3em 0; font-weight: var(--font-weight-medium); }
+
+.prose p { margin: 0.8em 0; }
+.prose ul, .prose ol { margin: 0.8em 0 0.8em 1.25em; }
+.prose blockquote { margin: 0.8em 0; padding-left: 1em; border-left: 4px solid var(--color-border-default); color: var(--color-text-secondary); }
+.prose pre { background: var(--color-surface-muted); padding: 12px; border-radius: var(--radius-md); overflow: auto; }
+.prose code { background: color-mix(in srgb, var(--color-surface-muted) 60%, transparent); padding: 0.15em 0.3em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace; }

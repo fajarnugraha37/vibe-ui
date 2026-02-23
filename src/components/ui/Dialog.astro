@@ -1,0 +1,14 @@
+---
+import DialogIsland from "../../islands/react/Dialog.tsx";
+
+interface Props {
+  triggerText?: string;
+  title?: string;
+  description?: string;
+  class?: string;
+}
+
+const { triggerText = 'Open dialog', title = 'Dialog', description = '', class: className = '' } = Astro.props as Props;
+---
+
+<DialogIsland client:load triggerText={triggerText} title={title} description={description} class={className} />

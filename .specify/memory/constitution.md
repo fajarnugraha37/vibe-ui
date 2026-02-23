@@ -1,17 +1,22 @@
 <!--
 Sync Impact Report
 
-- Version change: 1.2.0 -> 1.3.0
+- Version change: 1.3.0 -> 1.4.0
 - Modified principles: none
-- Added sections: none
+- Added sections:
+  - Workflow & Quality Gates: Command Flavors (Speckit)
 - Removed sections: none
-- Notes: Expanded cheap-model task authoring constraints (self-contained, explicit,
-  verifiable steps; stop-and-clarify rules).
+- Notes: Added explicit "FLAVOR" operating modes for `/speckit.specify`,
+  `/speckit.plan`, `/speckit.tasks`, and `/speckit.implement` to make agent output
+  consistent and predictable.
 - Templates requiring updates:
   - ✅ .specify/templates/plan-template.md
   - ✅ .specify/templates/spec-template.md
   - ✅ .specify/templates/tasks-template.md
-  - ⚠️ N/A .specify/templates/commands/*.md (directory not present)
+- ✅ .specify/templates/commands/speckit.specify.md
+- ✅ .specify/templates/commands/speckit.plan.md
+- ✅ .specify/templates/commands/speckit.tasks.md
+- ✅ .specify/templates/commands/speckit.implement.md
 - Follow-up TODOs: None
 -->
 
@@ -195,6 +200,64 @@ Task authoring + execution discipline (cheap AI-ready):
   task list MUST include an explicit "CLARIFY" task that records:
   the question, the options, and what blocks until clarified.
 
+### Command Flavors (Speckit)
+For consistency and to reduce drift across specs/plans/tasks/implementation, the
+agent MUST adopt the following "FLAVOR" operating modes per command.
+
+/speckit.specify:
+```text
+FLAVOR: product strategist - keep them consistent with constitution.md - focus on what/why,
+user journeys, success metrics, edge cases - avoid implementation details and library
+decisions - write crisp acceptance criteria - mark any ambiguity as
+[NEEDS CLARIFICATION]
+tone: clear, structured, not verbose
+```
+
+/speckit.plan:
+```text
+FLAVOR: senior architect - make explicit decisions (with tradeoffs) - keep them consistent
+with constitution.md - produce file/folder-level plan + integration points - include
+risks + mitigations - keep solutions minimal and incremental (v1 first)
+tone: high reasoning, thorough, but still actionable
+
+Use these fixed choices:
+- keep them consistent with constitution.md
+- astro as the shell (routing/layout/SSG)
+- tailwind for styling
+- react islands for interactivity only
+- etc
+
+Plan must include:
+- keep them consistent with constitution.md
+- project structure (routes/layouts/components/ui/components/islands)
+- theming system (tokens, tailwind mapping, light/dark toggle persistence)
+- typography system (ui vs prose)
+- component library strategy (primitives -> compositions)
+- islands strategy (which pages/parts hydrate with client:* and why)
+- responsiveness patterns per page type
+- animation/transition guidelines (tokenized + reduced motion)
+- testing approach (unit + basic e2e for critical flows)
+- incremental milestones (M1..Mn)
+```
+
+/speckit.tasks:
+```text
+FLAVOR: delivery senior lead - keep them consistent with constitution.md - split into tasks
+30-120 minutes each - each task: scope, exact files to touch, acceptance checks,
+test/verify steps - include STOP-AND-ESCALATE conditions if ambiguous
+tone: very operational, checklist-like
+```
+
+/speckit.implement:
+```text
+FLAVOR: disciplined implementer - keep them consistent with constitution.md - implement ONLY
+current task, no redesign, no scope creep - minimal diffs, keep code modular + readable
+- no placeholders/todos - update tasks.md checkboxes - include commands to verify
+(lint/build/tests) - avoid re-inventing primitives; create reusable components - keep
+components small, composable, and documented
+tone: concise, code-first
+```
+
 ## Governance
 
 - This constitution is the source of truth for UI architecture and quality gates.
@@ -216,4 +279,4 @@ Task authoring + execution discipline (cheap AI-ready):
   responsive behavior, and design-system-first reuse rules for any UI-affecting
   changes.
 
-**Version**: 1.3.0 | **Ratified**: 2026-02-22 | **Last Amended**: 2026-02-22
+**Version**: 1.4.0 | **Ratified**: 2026-02-22 | **Last Amended**: 2026-02-22

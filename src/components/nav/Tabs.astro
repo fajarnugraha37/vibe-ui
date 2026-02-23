@@ -1,0 +1,26 @@
+---
+interface Tab { id: string; title: string; href?: string; disabled?: boolean; }
+interface Props { tabs?: Tab[]; activeId?: string; class?: string; }
+
+const { tabs = [], activeId, class: className = '' } = Astro.props as Props;
+---
+
+<div class={`tabs ${className}`} role="tablist" aria-label="Tabs">
+  {tabs.map((t) => (
+    <a
+      role="tab"
+      aria-selected={t.id === activeId ? 'true' : 'false'}
+      aria-disabled={t.disabled ? 'true' : undefined}
+      href={t.href ?? '#'}
+      class={`tabs__item ${t.id === activeId ? 'is-active' : ''} ${t.disabled ? 'is-disabled' : ''}`}
+      tabindex={t.disabled ? -1 : 0}
+      >{t.title}</a>
+  ))}
+</div>
+
+<style>
+.tabs { display:flex; gap:0.5rem; border-bottom:1px solid var(--color-border-default); }
+.tabs__item { padding: 0.5rem 0.75rem; color: var(--color-text-primary); text-decoration:none; display:inline-block; }
+.tabs__item.is-active { border-bottom: 2px solid var(--color-link-primary); color: var(--color-link-primary); }
+.tabs__item.is-disabled { opacity: 0.6; pointer-events: none; }
+</style>

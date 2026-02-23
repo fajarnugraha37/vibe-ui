@@ -1,0 +1,19 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from "../../../components/layout/Container.astro";
+---
+
+<Layout title="Dialog (Modal)">
+  <Container>
+    <h1>Dialog (Modal)</h1>
+    <p>Use the Dialog island for accessible overlays that require focus management and keyboard handling.</p>
+    <h2>Usage</h2>
+    <pre><code>&lt;Dialog triggerText="Open" title="My dialog" description="..."&gt;...&lt;/Dialog&gt;</code></pre>
+    <h2>Accessibility</h2>
+    <ul>
+      <li>Focus is trapped within the dialog while open.</li>
+      <li>Escape closes the dialog and focus returns to the trigger.</li>
+      <li>Dialog uses role="dialog" and aria-modal="true".</li>
+    </ul>
+  </Container>
+</Layout>

@@ -1,0 +1,61 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from '../../../components/layout/Container.astro';
+---
+
+<Layout>
+  <Container>
+    <h1>Form validation (demo)</h1>
+
+    <form id="demo-form" novalidate>
+      <label for="name">Name <span aria-hidden="true">*</span></label>
+      <input id="name" name="name" placeholder="Your name" />
+      <p id="name-error" class="input-error" role="alert" hidden>This field is required</p>
+
+      <div style="margin-top:12px;">
+        <button id="submit" type="submit">Submit</button>
+      </div>
+    </form>
+  </Container>
+
+  <script type="module">
+    (function () {
+      const form = document.getElementById('demo-form');
+      const input = document.getElementById('name');
+      const error = document.getElementById('name-error');
+      const submit = document.getElementById('submit');
+
+      function validate() {
+        const valid = input.value.trim().length > 0;
+        if (!valid) {
+          error.hidden = false;
+          return false;
+        } else {
+          error.hidden = true;
+          return true;
+        }
+      }
+
+      input.addEventListener('blur', validate);
+
+      form.addEventListener('submit', function (e) {
+        if (!validate()) {
+          e.preventDefault();
+          input.focus();
+          return;
+        }
+        e.preventDefault();
+        submit.disabled = true;
+        submit.textContent = 'Loading...';
+        setTimeout(function () {
+          submit.textContent = 'Submitted';
+          submit.disabled = false;
+          const div = document.createElement('div');
+          div.id = 'submitted';
+          div.textContent = 'Form submitted';
+          document.body.appendChild(div);
+        }, 600);
+      });
+    })();
+  </script>
+</Layout>

@@ -1,0 +1,30 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from '../../../components/layout/Container.astro';
+import Card from '../../../components/ui/Card.astro';
+---
+
+<Layout title="Surface / Card Stories">
+  <Container>
+  <h1>Surface / Card stories</h1>
+
+  <section>
+    <h2>Semantic surfaces</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <Card variant="default">Default surface</Card>
+      <Card variant="muted">Muted surface</Card>
+      <Card variant="highlight">Highlight surface</Card>
+    </div>
+  </section>
+
+  <section style="margin-top:16px;">
+    <h2>Elevation</h2>
+    <div style="display:flex;gap:12px;align-items:stretch;">
+      <Card elevation="none">No elevation</Card>
+      <Card elevation="sm">Small elevation</Card>
+      <Card elevation="md">Medium elevation</Card>
+      <Card elevation="lg">Large elevation</Card>
+    </div>
+  </section>
+</Container>
+</Layout>

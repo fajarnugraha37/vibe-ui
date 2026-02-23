@@ -23,3 +23,15 @@ logs/
 
 # jetbrains setting folder
 .idea/
+
+# IDE
+.vscode/
+
+# build/artifacts
+build/
+coverage/
+
+# lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

@@ -1,0 +1,36 @@
+---
+interface Props {
+  variant?: 'default' | 'muted' | 'highlight';
+  elevation?: 'none' | 'sm' | 'md' | 'lg';
+  class?: string;
+}
+const { variant = 'default', elevation = 'sm', class: className = '' } = Astro.props as Props;
+---
+
+<div class={`surface surface--${variant} surface--elev-${elevation} ${className}`} role="group">
+  <slot />
+</div>
+
+<style>
+.surface {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-none);
+  border: 1px solid var(--color-border-default);
+}
+
+.surface--muted {
+  background: var(--color-surface-muted);
+}
+
+.surface--highlight {
+  background: var(--color-surface-highlight, var(--color-surface-default));
+}
+
+.surface--elev-none { box-shadow: none; }
+.surface--elev-sm { box-shadow: var(--shadow-sm); }
+.surface--elev-md { box-shadow: var(--shadow-md); }
+.surface--elev-lg { box-shadow: var(--shadow-lg); }
+</style>

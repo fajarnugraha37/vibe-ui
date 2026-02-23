@@ -1,0 +1,37 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  decorative?: boolean;
+  label?: string;
+  class?: string;
+}
+
+const {
+  size = 'md',
+  decorative = true,
+  label = 'Loading',
+  class: className = ''
+} = Astro.props as Props;
+---
+
+{decorative ? <span class={`spinner spinner--${size} ${className}`} aria-hidden="true"></span> : <span class={`spinner spinner--${size} ${className}`} role="status" aria-live="polite" aria-label={label}></span>}
+
+<style>
+.spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid var(--color-surface-default);
+  border-left-color: transparent;
+  box-sizing: border-box;
+  animation: spin var(--motion-duration-medium) linear infinite;
+}
+.spinner--sm { width: var(--space-2); height: var(--space-2); }
+.spinner--md { width: var(--space-3); height: var(--space-3); }
+.spinner--lg { width: calc(var(--space-3) * 1.5); height: calc(var(--space-3) * 1.5); }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}
+</style>

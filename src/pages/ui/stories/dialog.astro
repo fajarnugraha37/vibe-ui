@@ -1,0 +1,17 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from "../../../components/layout/Container.astro";
+import Dialog from "../../../components/ui/Dialog.astro";
+---
+
+<Layout title="Dialog Stories">
+  <Container>
+    <h1>Dialog (Modal) stories</h1>
+    <section>
+      <h2>Basic dialog</h2>
+      <Dialog triggerText="Open Dialog" title="Example dialog" description="A minimal accessible dialog example">
+        <p>This dialog is implemented as a React island and demonstrates focus trap, escape to close, and focus return.</p>
+      </Dialog>
+    </section>
+  </Container>
+</Layout>

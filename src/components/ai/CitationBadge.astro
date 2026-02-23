@@ -1,0 +1,29 @@
+---
+interface Props {
+  label?: string;
+  href?: string;
+  class?: string;
+}
+
+const { label = 'Citation', href = '#', class: className = '' } = Astro.props as Props;
+---
+
+{href ? (
+  <a class={`citation-badge ${className}`} href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+) : (
+  <span class={`citation-badge ${className}`}>{label}</span>
+)}
+
+<style>
+.citation-badge {
+  display: inline-block;
+  padding: calc(var(--space-1)) calc(var(--space-2));
+  background: var(--color-surface-muted);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-default);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.citation-badge:hover { text-decoration: underline; }
+</style>

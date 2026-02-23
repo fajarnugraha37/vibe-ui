@@ -1,0 +1,36 @@
+---
+interface Props {
+  variant?: 'default' | 'muted' | 'highlight';
+  elevation?: 'none' | 'sm' | 'md' | 'lg';
+  class?: string;
+}
+const { variant = 'default', elevation = 'sm', class: className = '' } = Astro.props as Props;
+---
+
+<article class={`card card--${variant} card--elev-${elevation} ${className}`} role="region">
+  <slot />
+</article>
+
+<style>
+.card {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-none);
+  border: 1px solid var(--color-border-default);
+}
+
+.card--muted {
+  background: var(--color-surface-muted);
+}
+
+.card--highlight {
+  background: var(--color-surface-highlight, var(--color-surface-default));
+}
+
+.card--elev-none { box-shadow: none; }
+.card--elev-sm { box-shadow: var(--shadow-sm); }
+.card--elev-md { box-shadow: var(--shadow-md); }
+.card--elev-lg { box-shadow: var(--shadow-lg); }
+</style>

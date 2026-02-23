@@ -1,0 +1,65 @@
+---
+import "../../styles/typography/ui.css";
+
+interface Props {
+  id?: string;
+  name?: string;
+  checked?: boolean;
+  disabled?: boolean;
+  required?: boolean;
+  value?: string;
+  label?: string;
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  checked = false,
+  disabled = false,
+  required = false,
+  value,
+  label = '',
+  size = 'md',
+  class: className = ''
+} = Astro.props as Props;
+
+const inputId = id ?? (name ? `checkbox-${name}` : undefined);
+---
+
+<label class={`checkbox ${className}`}> 
+  <input
+    id={inputId}
+    name={name}
+    type="checkbox"
+    class={`checkbox__input checkbox__input--${size}`}
+    checked={checked ? true : undefined}
+    disabled={disabled ? true : undefined}
+    value={value}
+    required={required ? true : undefined}
+    aria-checked={checked ? 'true' : undefined}
+  />
+  <span class="checkbox__box" aria-hidden="true">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.285 6.709a1 1 0 0 0-1.414-1.418L9 15.163l-3.871-3.871a1 1 0 0 0-1.414 1.414l4.578 4.578a1 1 0 0 0 1.414 0l10.578-10.578z"></path></svg>
+  </span>
+  {label && <span class="checkbox__label">{label}</span>}
+</label>
+
+<style>
+.checkbox { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; user-select: none; }
+.checkbox__input { position: absolute; opacity: 0; width: 0; height: 0; }
+.checkbox__box { width: 1rem; height: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border-default); background: var(--color-surface-default); display: inline-flex; align-items: center; justify-content: center; transition: background 120ms ease, border-color 120ms ease; }
+.checkbox__box svg { width: 0.65rem; height: 0.65rem; display: none; fill: var(--color-surface-default); }
+.checkbox__input:checked + .checkbox__box { background: var(--color-link-primary); border-color: var(--color-link-primary); }
+.checkbox__input:checked + .checkbox__box svg { display: block; fill: var(--color-surface-default); }
+.checkbox__label { font-size: 0.95rem; color: var(--color-text-primary); }
+
+/* Sizes */
+.checkbox__input--sm + .checkbox__box { width: 0.875rem; height: 0.875rem; }
+.checkbox__input--lg + .checkbox__box { width: 1.25rem; height: 1.25rem; }
+
+/* Disabled */
+.checkbox__input[disabled] + .checkbox__box { opacity: 0.6; cursor: not-allowed; }
+.checkbox__input[disabled] ~ .checkbox__label { opacity: 0.6; }
+</style>

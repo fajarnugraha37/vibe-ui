@@ -1,0 +1,83 @@
+---
+import "../../styles/typography/ui.css";
+
+interface Props {
+  id?: string;
+  name?: string;
+  placeholder?: string;
+  value?: string;
+  rows?: number;
+  state?: 'default' | 'error' | 'success' | 'loading' | 'disabled';
+  size?: 'sm' | 'md' | 'lg';
+  required?: boolean;
+  readonly?: boolean;
+  class?: string;
+  error?: string;
+}
+
+const {
+  id,
+  name,
+  placeholder = '',
+  value = '',
+  rows = 4,
+  state = 'default',
+  size = 'md',
+  required = false,
+  readonly = false,
+  class: className = '',
+  error = ''
+} = Astro.props as Props;
+
+const inputId = id ?? (name ? `textarea-${name}` : undefined);
+const describedBy = error && inputId ? `${inputId}-error` : undefined;
+---
+
+<div class={`form-control ${className}`}>
+  <textarea
+    id={inputId}
+    name={name}
+    class={`textarea textarea--${size} textarea--${state}`}
+    rows={rows}
+    placeholder={placeholder}
+    disabled={state === 'disabled' ? true : undefined}
+    readonly={readonly ? true : undefined}
+    aria-invalid={state === 'error' ? 'true' : 'false'}
+    aria-describedby={describedBy}
+    required={required ? true : undefined}
+  >{value}</textarea>
+
+  {state === 'loading' ? <span class="input-spinner" aria-hidden="true"></span> : null}
+  {error ? <p id={describedBy} class="input-error" role="alert">{error}</p> : null}
+</div>
+
+<style>
+.textarea {
+  width: 100%;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+  font: inherit;
+  box-sizing: border-box;
+  min-height: 96px;
+}
+.textarea:focus {
+  outline: 2px solid var(--color-link-primary);
+  outline-offset: 2px;
+}
+.textarea--sm { padding: calc(var(--space-1)); }
+.textarea--md { padding: var(--space-2); }
+.textarea--lg { padding: var(--space-3); }
+
+.textarea--error { border-color: var(--color-state-error); }
+.textarea--success { border-color: var(--color-state-success, var(--color-link-primary)); }
+.textarea--disabled { opacity: 0.6; cursor: not-allowed; }
+
+.input-error { margin-top: 0.25rem; font-size: 0.875rem; color: var(--color-state-error); }
+.input-spinner { display:inline-block; width:1em; height:1em; border-radius:50%; border:2px solid var(--color-surface-default); border-left-color:transparent; animation: spin var(--motion-duration-medium) linear infinite; margin-left:0.5rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.form-control { position: relative; display:block; }
+</style>

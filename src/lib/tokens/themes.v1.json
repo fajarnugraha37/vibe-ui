@@ -1,0 +1,54 @@
+{
+  "version": "1",
+  "description": "Theme values mapping semantic token ids to concrete color values across modes",
+  "modes": {
+    "light": {
+      "default": {
+        "color.surface.default": "#ffffff",
+        "color.surface.muted": "#f7f7f8",
+        "color.text.primary": "#0f1724",
+        "color.text.secondary": "#475569",
+        "color.border.default": "#e6e9ee",
+        "color.state.error": "#ef4444",
+        "color.state.success": "#10b981",
+        "color.link.primary": "#2563eb",
+        "color.ring": "rgba(37,99,235,0.35)"
+      },
+      "high": {
+        "color.surface.default": "#ffffff",
+        "color.surface.muted": "#f7f7f8",
+        "color.text.primary": "#000000",
+        "color.text.secondary": "#0b1220",
+        "color.border.default": "#111827",
+        "color.state.error": "#b91c1c",
+        "color.state.success": "#047857",
+        "color.link.primary": "#1d4ed8",
+        "color.ring": "rgba(29,78,216,0.4)"
+      }
+    },
+    "dark": {
+      "default": {
+        "color.surface.default": "#0b1220",
+        "color.surface.muted": "#0f1724",
+        "color.text.primary": "#e6eef8",
+        "color.text.secondary": "#a0aec0",
+        "color.border.default": "#1f2937",
+        "color.state.error": "#f87171",
+        "color.state.success": "#34d399",
+        "color.link.primary": "#60a5fa",
+        "color.ring": "rgba(99,102,241,0.35)"
+      },
+      "high": {
+        "color.surface.default": "#05070a",
+        "color.surface.muted": "#041124",
+        "color.text.primary": "#ffffff",
+        "color.text.secondary": "#d1d5db",
+        "color.border.default": "#374151",
+        "color.state.error": "#fca5a5",
+        "color.state.success": "#10b981",
+        "color.link.primary": "#93c5fd",
+        "color.ring": "rgba(99,102,241,0.6)"
+      }
+    }
+  }
+}
