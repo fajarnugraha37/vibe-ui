@@ -3,12 +3,13 @@ import { createPortal } from 'react-dom';
 
 interface Props {
   triggerText?: string;
+  triggerId?: string;
   direction?: 'left' | 'right' | 'bottom';
   title?: string;
   children?: React.ReactNode;
 }
 
-export default function Drawer({ triggerText = 'Open drawer', direction = 'left', title = 'Panel', children }: Props) {
+export default function Drawer({ triggerText = 'Open drawer', triggerId, direction = 'left', title = 'Panel', children }: Props) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -42,8 +43,24 @@ export default function Drawer({ triggerText = 'Open drawer', direction = 'left'
     };
   }, [open]);
 
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      const el = triggerId ? document.getElementById(triggerId) : document.querySelector('.drawer-trigger');
+      if (!el) return;
+      const onClick = () => setOpen(true);
+      el.addEventListener('click', onClick);
+      // mark the trigger as having an island mounted so tests can wait
+      el.setAttribute('data-island-mounted', '1');
+      return () => {
+        el.removeEventListener('click', onClick);
+        el.removeAttribute('data-island-mounted');
+      };
+    }
+  }, [triggerId]);
+
+  // Do not render a trigger on the server; the Astro wrapper provides a stable server-side trigger when used.
   if (typeof document === 'undefined') {
-    return <button className="drawer-trigger">{triggerText}</button>;
+    return null;
   }
 
   const panelStyle = (dir: string) => {
@@ -54,7 +71,7 @@ export default function Drawer({ triggerText = 'Open drawer', direction = 'left'
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className="drawer-trigger">{triggerText}</button>
+      {!triggerId ? <button onClick={() => setOpen(true)} className="drawer-trigger">{triggerText}</button> : null}
       {open && createPortal(
         <div className="drawer-overlay" role="presentation" onClick={() => setOpen(false)}>
           <aside

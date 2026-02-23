@@ -56,3 +56,33 @@ T035 Chat citations (badges + list)
   - npm test → 2 passed
   - npm run build → success (21 pages built)
 
+
+## BLOCKED: T036 Add e2e smoke for overlay focus management
+
+Failing command:
+- npx playwright test tests/e2e/overlays-focus.spec.ts --project=chromium --workers=1
+
+Latest failing output (trimmed):
+- Playwright test timeout waiting for button attached: locator.waitFor: Test timeout of 30000ms exceeded while waiting for getByRole('button', { name: /open dialog/i }) to be attached (dialog test)
+- Similar timeouts observed for the Drawer test (waiting for getByRole('button', { name: /open left/i })).
+- Previous mount-marker wait also reported: selector '.dialog-trigger[data-island-mounted="1"]' not observed.
+
+What was tried (chronological):
+- Initial approach: server-rendered trigger with the React island attaching to the existing DOM trigger by id and setting data-island-mounted when listeners attach.
+- Added explicit waits and a data-island-mounted marker for the island to set when it attaches to the server trigger to make tests wait for hydration.
+- Observed intermittent element-detached errors (SSR trigger vs client listener mismatch) during hydration.
+- Attempted change: render the trigger entirely client-side (island owns the trigger) by updating Dialog.astro and Drawer.astro to pass triggerText to islands and remove SSR trigger to avoid duplicate elements.
+- Re-ran e2e tests; Playwright now times out waiting for the client-rendered button to be attached (no button found), indicating island mounting timing is unpredictable in the test harness.
+
+Spec/Constitution source of conflict:
+- Islands strategy in plan.md / constitution: "Astro SSR components first; React islands only for interactive overlays." This task sits at that boundary and the hydration ordering between server markup and client islands is causing unstable test behavior.
+
+Questions to proceed (pick up to 3):
+1. Choose one approach for stability: (A) server-stable triggers with deterministic IDs that islands attach to, or (B) client-owned triggers (islands render the trigger) and tests wait for the button to appear — which is preferred?
+2. If (A) server-stable triggers are preferred: confirm a deterministic id format (suggestion: 'dialog-trigger-{name}' / 'drawer-trigger-{name}') so tests can target a known selector.
+3. If (B) client-owned triggers are preferred: confirm that e2e tests should be updated to wait for the button locator (e.g., page.waitForSelector('button:has-text("Open dialog")', { timeout: 10000 })) instead of relying on data-island-mounted markers.
+
+What I need to proceed:
+- Answer one of the above choices (A or B) and, if applicable, the deterministic id format or the preferred test selector/timeout. Once given, the implementer will update islands or tests and re-run verification.
+
+

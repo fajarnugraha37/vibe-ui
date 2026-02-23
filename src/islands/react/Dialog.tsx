@@ -3,12 +3,13 @@ import { createPortal } from 'react-dom';
 
 interface Props {
   triggerText?: string;
+  triggerId?: string;
   title?: string;
   description?: string;
   children?: React.ReactNode;
 }
 
-export default function Dialog({ triggerText = 'Open dialog', title = 'Dialog', description, children }: Props) {
+export default function Dialog({ triggerText = 'Open dialog', triggerId, title = 'Dialog', description, children }: Props) {
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -54,14 +55,34 @@ export default function Dialog({ triggerText = 'Open dialog', title = 'Dialog', 
     };
   }, [open]);
 
-  // Render nothing on server to avoid mismatch; island will mount on client
+  useEffect(() => {
+    // If a server-rendered trigger exists (by id), attach a click listener instead of rendering a React button.
+    if (typeof document !== 'undefined') {
+      // prefer the explicit trigger id if provided, otherwise attach to the first .dialog-trigger
+      const el = triggerId ? document.getElementById(triggerId) : document.querySelector('.dialog-trigger');
+      if (!el) return;
+      const onClick = () => setOpen(true);
+      el.addEventListener('click', onClick);
+      // mark the trigger as having an island mounted so tests can wait for hydration
+      el.setAttribute('data-island-mounted', '1');
+      return () => {
+        el.removeEventListener('click', onClick);
+        el.removeAttribute('data-island-mounted');
+      };
+    }
+  }, [triggerId]);
+
+  // Do not render a trigger on the server; the Astro wrapper provides a stable server-side trigger when used.
   if (typeof document === 'undefined') {
-    return <button onClick={() => {}} className="dialog-trigger">{triggerText}</button>;
+    return null;
   }
+
+  // If a triggerId was provided, do not render a duplicate trigger button (use server one).
+  const renderTrigger = !triggerId;
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className="dialog-trigger">{triggerText}</button>
+      {renderTrigger ? <button onClick={() => setOpen(true)} className="dialog-trigger">{triggerText}</button> : null}
       {open && createPortal(
         <div className="dialog-overlay" role="presentation" onClick={() => setOpen(false)}>
           <div

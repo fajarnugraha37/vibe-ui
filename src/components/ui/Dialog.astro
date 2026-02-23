@@ -11,5 +11,4 @@ interface Props {
 const { triggerText = 'Open dialog', title = 'Dialog', description = '', class: className = '' } = Astro.props as Props;
 ---
 
-<!-- Wrapper: renders a React island that provides the dialog trigger and overlay -->
 <DialogIsland client:load triggerText={triggerText} title={title} description={description} class={className} />
